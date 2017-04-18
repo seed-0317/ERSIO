@@ -1,0 +1,17 @@
+
+hostname: seed-development.crv1otzbekk9.us-east-1.rds.amazonaws.com
+port: 5432
+Database Name: SEED2017
+User: seed_superuser
+Password: Seed2017
+
+To run a sql script in order to create and populate tables:
+
+1. Navigate to your sql script on your local.
+2. Psql DBname DBUserName -h hostname -f filename
+       psql SEED2017 seed_superuser -h seed-development.crv1otzbekk9.us-east-1.rds.amazonaws.com -f create_db.sql
+3. Enter password when you get promoted
+
+To log in the database
+1. Anywhere on terminal
+      psql SEED2017 seed_superuser -h seed-development.crv1otzbekk9.us-east-1.rds.amazonaws.com
