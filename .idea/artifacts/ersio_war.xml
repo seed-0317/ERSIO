@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="ersio:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="ersio.war">
-      <element id="artifact" artifact-name="ersio:war exploded" />
-    </root>
-  </artifact>
-</component>
