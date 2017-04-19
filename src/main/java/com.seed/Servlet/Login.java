@@ -24,7 +24,7 @@ public class Login extends HttpServlet {
         String username = request.getParameter("userNameForm");
 
         if(username == null) {
-            response.sendRedirect("login");
+            response.sendRedirect("Login.html");
         } else {
             HttpSession session = request.getSession();
 
@@ -32,15 +32,20 @@ public class Login extends HttpServlet {
             BusinessLogic businessLogic = new BusinessLogic();
 
             User user = businessLogic.login(username);
-            session.setAttribute("firstName", user.getFirstName());
+            if (user == null){
+                response.sendRedirect("Login.html");
+            }
+            else{
+                //Send user to either employee home or manager home depending on UR_ROLE in ERSIO.ERS_USER_ROLES
+                if (user.getUserRoleType().equals("1")){
+                    response.sendRedirect("EmployeeHome");
+                }
+                else {
+                    response.sendRedirect("ManagerHome");
+                }
+            }
+            //session.setAttribute("firstName", user.getFirstName());
 
-            //Send user to either employee home or manager home depending on UR_ROLE in ERSIO.ERS_USER_ROLES
-            if (session.getAttribute("UR_ROLE").equals("1")){
-                response.sendRedirect("EmployeeHome");
-            }
-            else {
-                response.sendRedirect("ManagerHome");
-            }
         }
     }
 }

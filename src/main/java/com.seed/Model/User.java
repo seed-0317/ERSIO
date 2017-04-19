@@ -8,10 +8,11 @@ public class User {
     private String userName;
     private String firstName;
     private String lastName;
-    private String  email;
+    private String email;
     private String userRoleID;
+    private String userRoleType;
 
-    public User (String userID, String userName, String firstName, String lastName, String  email, String userRoleID){
+    public User (String userID, String userName, String firstName, String lastName, String  email, String userRoleID, String userRoleType){
         super();
         this.userID=userID;
         this.userName=userName;
@@ -19,6 +20,7 @@ public class User {
         this.lastName=lastName;
         this.email=email;
         this.userRoleID=userRoleID;
+        this.userRoleType=userRoleType;
     }
 
     public String getUserID() {
@@ -69,6 +71,14 @@ public class User {
         this.userRoleID = userRoleID;
     }
 
+    public String getUserRoleType() {
+        return userRoleType;
+    }
+
+    public void setUserRoleType(String userRoleType) {
+        this.userRoleType = userRoleType;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,7 +91,8 @@ public class User {
         if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
         if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
-        return userRoleID != null ? userRoleID.equals(user.userRoleID) : user.userRoleID == null;
+        if (userRoleID != null ? !userRoleID.equals(user.userRoleID) : user.userRoleID != null) return false;
+        return userRoleType != null ? userRoleType.equals(user.userRoleType) : user.userRoleType == null;
     }
 
     @Override
@@ -92,6 +103,7 @@ public class User {
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (userRoleID != null ? userRoleID.hashCode() : 0);
+        result = 31 * result + (userRoleType != null ? userRoleType.hashCode() : 0);
         return result;
     }
 
@@ -104,6 +116,7 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", userRoleID='" + userRoleID + '\'' +
+                ", userRoleType='" + userRoleType + '\'' +
                 '}';
     }
 }

@@ -10,16 +10,13 @@
 </head>
 <body>
 
-<h3>Enter username below to login:</h3>
+<h3 style="margin-left: 10px">Enter username below to login:</h3>
 
-<form name="userNameForm"
-      action="/login">
-    User name: <input type="text" name="UserName" value="User"><br>
-    <button type="submit" value="Submit" method="post"></button>
+<form action="/login" method="post" style="margin-left: 10px">
+    User name: <input type="text" name="userNameForm"><br>
+    <button type="submit" formmethod="post" formaction="/login">Submit</button>
 </form>
-
 <br>
-
 
 </body>
 </html>
