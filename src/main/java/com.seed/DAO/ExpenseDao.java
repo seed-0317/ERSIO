@@ -1,7 +1,10 @@
 package com.seed.DAO;
 
-/**
- * Created by bdq940 on 4/18/17.
- */
-public class ExpenseDao {
+import com.seed.Model.Expense;
+import java.util.List;
+
+public interface ExpenseDao {
+
+    void createExpense(Expense newExpense);
+    List<Expense> retrieveExpenses();
 }
