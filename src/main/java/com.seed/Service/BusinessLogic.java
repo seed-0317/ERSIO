@@ -29,7 +29,7 @@ public class BusinessLogic {
             Iterator<User> iter = user.listIterator();
             while (iter.hasNext()) {
                 User currentUser = iter.next();
-                if (currentUser.getUserID().equals(username)) {
+                if (currentUser.getUserName().equals(username)) {
                     return currentUser;
                 }
             }

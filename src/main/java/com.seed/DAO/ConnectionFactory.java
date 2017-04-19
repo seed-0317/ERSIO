@@ -23,9 +23,11 @@ public class ConnectionFactory {
 
     public static Connection createConnection() {
         Connection connection = null;
+
         try {
+            Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return connection;

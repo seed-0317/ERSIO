@@ -37,10 +37,11 @@ public class UserDaoImpl implements UserDao{
     public List<User> retrieveUsers() {
         try(Connection connection = ConnectionFactory.createConnection();){
 
-            PreparedStatement statement = connection.prepareStatement("select U_ID, U_USERNAME, U_FIRSTNAME, U_LASTNAME, U_EMAIL, A.UR_ID, B.UR_ID " +
+            PreparedStatement statement = connection.prepareStatement("select U_ID, U_USERNAME, U_FIRSTNAME, U_LASTNAME, U_EMAIL, A.UR_ID, B.UR_ROLE " +
                     "from ERSIO.ERS_USERS A JOIN ERSIO.ERS_USER_ROLES B ON A.UR_ID = B.UR_ID");
 
             ResultSet resultset = statement.executeQuery();
+
 
             if (resultset == null){
                 return null;
@@ -51,8 +52,8 @@ public class UserDaoImpl implements UserDao{
                 while(resultset.next()) {
                     String userID = resultset.getString("U_ID");
                     String userName = resultset.getString("U_USERNAME");
-                    String firstName = resultset.getString("U_FIRST_NAME");
-                    String lastName = resultset.getString("U_LAST_NAME");
+                    String firstName = resultset.getString("U_FIRSTNAME");
+                    String lastName = resultset.getString("U_LASTNAME");
                     String email = resultset.getString("U_EMAIL");
                     String userRoleID = resultset.getString("UR_ID");
                     String userRoleType = resultset.getString("UR_ROLE");

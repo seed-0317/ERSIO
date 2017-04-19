@@ -22,7 +22,7 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String username = request.getParameter("userNameForm");
-
+        System.out.println(username);
         if(username == null) {
             response.sendRedirect("Login.html");
         } else {
@@ -38,13 +38,16 @@ public class Login extends HttpServlet {
             else{
                 //Send user to either employee home or manager home depending on UR_ROLE in ERSIO.ERS_USER_ROLES
                 if (user.getUserRoleType().equals("1")){
-                    response.sendRedirect("EmployeeHome");
+                    session.setAttribute("thisUser", user);
+                    response.sendRedirect("index.html");
                 }
                 else {
-                    response.sendRedirect("ManagerHome");
+                    session.setAttribute("thisUser", user);
+                    response.sendRedirect("index.html");
                 }
             }
-            //session.setAttribute("firstName", user.getFirstName());
+//            session.setAttribute("firstName", user);
+//            response.sendRedirect("index.html");
 
         }
     }
