@@ -37,13 +37,14 @@ public class Login extends HttpServlet {
             }
             else{
                 //Send user to either employee home or manager home depending on UR_ROLE in ERSIO.ERS_USER_ROLES
-                if (user.getUserRoleType().equals("1")){
+                if (user.getUserRoleType().equals("employee")){
                     session.setAttribute("thisUser", user);
-                    response.sendRedirect("index.html");
-                }
+                    response.sendRedirect("EmployeeHome.html");
+                    }
                 else {
                     session.setAttribute("thisUser", user);
-                    response.sendRedirect("index.html");
+                    response.sendRedirect("ManagerHome.html");
+                    }
                 }
             }
 //            session.setAttribute("firstName", user);
@@ -51,4 +52,3 @@ public class Login extends HttpServlet {
 
         }
     }
-}
