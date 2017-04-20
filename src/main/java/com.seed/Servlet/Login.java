@@ -1,6 +1,8 @@
 package com.seed.Servlet;
 
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,21 +34,26 @@ public class Login extends HttpServlet {
             BusinessLogic businessLogic = new BusinessLogic();
 
             User user = businessLogic.login(username);
+            List<Expense> expenses = new LinkedList<>();
+            Expense expenseone = new Expense("24", "200","descriptor of expense","receipt not used", "12/24",  "1/1", "Ben", "resolver", "meal", "pending");
+            expenses.add(expenseone);
             if (user == null){
                 response.sendRedirect("Login.html");
             }
             else{
                 //Send user to either employee home or manager home depending on UR_ROLE in ERSIO.ERS_USER_ROLES
                 if (user.getUserRoleType().equals("1")){
-                    session.setAttribute("thisUser", user);
-                    response.sendRedirect("index.html");
+                    session.setAttribute("authUser", user);
+                    session.setAttribute("expenses", expenses);
+                    response.sendRedirect("fatest.html");
                 }
                 else {
-                    session.setAttribute("thisUser", user);
-                    response.sendRedirect("index.html");
+                    session.setAttribute("authUser", user);
+                    session.setAttribute("expenses", expenses);
+                    response.sendRedirect("fatest.html");
                 }
             }
-//            session.setAttribute("firstName", user);
+//            session.setAttribute("authUser", user);
 //            response.sendRedirect("index.html");
 
         }
