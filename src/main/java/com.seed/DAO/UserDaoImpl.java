@@ -109,7 +109,7 @@ public class UserDaoImpl implements UserDao {
                     "U_LASTNAME=?," +
                     "U_EMAIL=?" +
                     "WHERE U_ID=?");
-            
+
             statement.setString(1, updatedUser.getFirstName());
             statement.setString(2, updatedUser.getLastName());
             statement.setString(3, updatedUser.getEmail());
