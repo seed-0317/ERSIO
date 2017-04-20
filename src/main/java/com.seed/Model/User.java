@@ -9,17 +9,17 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
-    private String userRoleID;
+    private String manager;
     private String userRoleType;
 
-    public User (String userID, String userName, String firstName, String lastName, String  email, String userRoleID, String userRoleType){
+    public User (String userID, String userName, String firstName, String lastName, String  email, String manager, String userRoleType){
         super();
         this.userID=userID;
         this.userName=userName;
         this.firstName=firstName;
         this.lastName=lastName;
         this.email=email;
-        this.userRoleID=userRoleID;
+        this.manager=manager;
         this.userRoleType=userRoleType;
     }
 
@@ -63,12 +63,12 @@ public class User {
         this.email = email;
     }
 
-    public String getUserRoleID() {
-        return userRoleID;
+    public String getManager() {
+        return manager;
     }
 
-    public void setUserRoleID(String userRoleID) {
-        this.userRoleID = userRoleID;
+    public void setManager(String manager) {
+        this.manager = manager;
     }
 
     public String getUserRoleType() {
@@ -91,7 +91,7 @@ public class User {
         if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
         if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
-        if (userRoleID != null ? !userRoleID.equals(user.userRoleID) : user.userRoleID != null) return false;
+        if (manager != null ? !manager.equals(user.manager) : user.manager != null) return false;
         return userRoleType != null ? userRoleType.equals(user.userRoleType) : user.userRoleType == null;
     }
 
@@ -102,7 +102,7 @@ public class User {
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (userRoleID != null ? userRoleID.hashCode() : 0);
+        result = 31 * result + (manager != null ? manager.hashCode() : 0);
         result = 31 * result + (userRoleType != null ? userRoleType.hashCode() : 0);
         return result;
     }
@@ -115,7 +115,7 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", userRoleID='" + userRoleID + '\'' +
+                ", manager='" + manager + '\'' +
                 ", userRoleType='" + userRoleType + '\'' +
                 '}';
     }

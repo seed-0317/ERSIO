@@ -4,7 +4,6 @@ public class Expense {
     private String expenseID;
     private String amount;
     private String descriptor;
-    private String receipt;
     private String submitted;
     private String resolved;
     private String idAuthor;
@@ -12,12 +11,11 @@ public class Expense {
     private String type;
     private String status;
 
-    public Expense (String expenseID, String amount, String descriptor, String receipt, String submitted, String resolved, String idAuthor, String resolver, String type, String status){
+    public Expense (String expenseID, String amount, String descriptor, String submitted, String resolved, String idAuthor, String resolver, String type, String status){
         super();
         this.expenseID=expenseID;
         this.amount=amount;
         this.descriptor=descriptor;
-        this.receipt=receipt;
         this.submitted=submitted;
         this.resolved=resolved;
         this.idAuthor=idAuthor;
@@ -36,10 +34,6 @@ public class Expense {
 
     public String getDescriptor() {
         return descriptor;
-    }
-
-    public String getReceipt() {
-        return receipt;
     }
 
     public String getSubmitted() {
@@ -78,10 +72,6 @@ public class Expense {
         this.descriptor = descriptor;
     }
 
-    public void setReceipt(String receipt) {
-        this.receipt = receipt;
-    }
-
     public void setSubmitted(String submitted) {
         this.submitted = submitted;
     }
@@ -116,7 +106,6 @@ public class Expense {
         if (!expenseID.equals(expense.expenseID)) return false;
         if (!amount.equals(expense.amount)) return false;
         if (descriptor != null ? !descriptor.equals(expense.descriptor) : expense.descriptor != null) return false;
-        if (receipt != null ? !receipt.equals(expense.receipt) : expense.receipt != null) return false;
         if (submitted != null ? !submitted.equals(expense.submitted) : expense.submitted != null) return false;
         if (resolved != null ? !resolved.equals(expense.resolved) : expense.resolved != null) return false;
         if (idAuthor != null ? !idAuthor.equals(expense.idAuthor) : expense.idAuthor != null) return false;
@@ -130,7 +119,6 @@ public class Expense {
         int result = expenseID.hashCode();
         result = 31 * result + amount.hashCode();
         result = 31 * result + (descriptor != null ? descriptor.hashCode() : 0);
-        result = 31 * result + (receipt != null ? receipt.hashCode() : 0);
         result = 31 * result + (submitted != null ? submitted.hashCode() : 0);
         result = 31 * result + (resolved != null ? resolved.hashCode() : 0);
         result = 31 * result + (idAuthor != null ? idAuthor.hashCode() : 0);
@@ -146,7 +134,6 @@ public class Expense {
                 "expenseID='" + expenseID + '\'' +
                 ", amount='" + amount + '\'' +
                 ", descriptor='" + descriptor + '\'' +
-                ", receipt='" + receipt + '\'' +
                 ", submitted='" + submitted + '\'' +
                 ", resolved='" + resolved + '\'' +
                 ", idAuthor='" + idAuthor + '\'' +
