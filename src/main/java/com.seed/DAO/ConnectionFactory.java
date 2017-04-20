@@ -13,8 +13,6 @@ public class ConnectionFactory {
     private static final String URL = System.getenv("CONNECTIONURL");
     private static final String USERNAME = System.getenv("CONNECTIONUSER");
     private static final String PASSWORD = System.getenv("CONNECTIONPASSWORD");
-    //private static final String URL = "jdbc:postgresql://seed-development.crv1otzbekk9.us-east-1.rds.amazonaws.com:5432/SEED2017";
-
 
     public static Connection createConnection() {
 
@@ -26,9 +24,11 @@ public class ConnectionFactory {
         }
 
         Connection connection = null;
+
         try {
+            Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return connection;

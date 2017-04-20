@@ -18,6 +18,7 @@ public class BusinessLogic {
      * @return person object if logged in successfully, otherwise {@code null}
      */
 
+<<<<<<< HEAD
     public User login(String userID) {
     if (userID == null || userID.isEmpty()) {
         // Could also: throw new IllegalArgumentException();
@@ -27,6 +28,16 @@ public class BusinessLogic {
         UserDao dao = new UserDaoImpl();
         User user = dao.retrieveUser(userID);
         return user;
+=======
+            Iterator<User> iter = user.listIterator();
+            while (iter.hasNext()) {
+                User currentUser = iter.next();
+                if (currentUser.getUserName().equals(username)) {
+                    return currentUser;
+                }
+            }
+            return null;
+>>>>>>> ae5e28068b7ef4e9682c1af8b859e9a182c0b2c5
         }
     }
     public void resolveReimbursement(String RS_ID, String RS_STATUS, String managerUserName){
