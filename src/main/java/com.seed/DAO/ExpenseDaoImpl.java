@@ -25,15 +25,10 @@ public class ExpenseDaoImpl implements ExpenseDao {
             LocalDate localDate = LocalDate.now();
 
             statement.setString(3, localDate.toString());
-            //statement.setString(4, newExpense.getSubmitted()); //insert current date from Java
-
             statement.setString(4, "");//Resolved date is empty when created
-
             statement.setString(5, newExpense.getIdAuthor());
-            statement.setString(6, newExpense.getResolver());//user should have manager ID...will implement user.getManager()
-
+            statement.setString(6, newExpense.getResolver());//user should have manager ID
             statement.setString(7, newExpense.getType());
-
             statement.setString(8, "3");//set status to 3 for pending
 
             statement.executeUpdate();
@@ -57,6 +52,8 @@ public class ExpenseDaoImpl implements ExpenseDao {
 
             ResultSet resultset = statement.executeQuery();
 
+            List<Expense> expenseList = new LinkedList<>();
+
             while(resultset.next()) {
                 String expenseID = resultset.getString("R_ID");
                 String amount = resultset.getString("R_AMOUNT");
@@ -70,9 +67,9 @@ public class ExpenseDaoImpl implements ExpenseDao {
 
                 Expense temp = new Expense(expenseID, amount, descriptor,submitted,resolved, idAuthor, resolver, type, status);
 
-                System.out.println(temp);
+                expenseList.add(temp);
             }
-
+            return expenseList;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -101,6 +98,5 @@ public class ExpenseDaoImpl implements ExpenseDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 }

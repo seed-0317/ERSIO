@@ -11,7 +11,7 @@ public class UserDaoImpl implements UserDao {
     public void createUser(User newUser) {
         try (Connection connection = ConnectionFactory.createConnection();) {
 
-            PreparedStatement statement = connection.prepareStatement("insert into ERSIO.ERS_USERS(U_USERNAME, U_FIRSTNAME, U_LASTNAME," +
+            PreparedStatement statement = connection.prepareStatement("insert into ERSIO.ERS_USERS(U_USERNAME, U_FIRSTNAME, U_LASTNAME, " +
                     "U_EMAIL, U_MANAGER, UR_ID) " +
                     "values(?, ?, ?, ?, ?, ?)");
             statement.setString(1, newUser.getUserName());
@@ -49,7 +49,7 @@ public class UserDaoImpl implements UserDao {
                     String firstName = resultset.getString("U_FIRSTNAME");
                     String lastName = resultset.getString("U_LASTNAME");
                     String email = resultset.getString("U_EMAIL");
-                    String manager = resultset.getString("U_MANAGER");//add U_MANAGER
+                    String manager = resultset.getString("U_MANAGER");
                     String userRoleType = resultset.getString("UR_ROLE");
 
                     User temp = new User(userID, userName, firstName, lastName, email, manager, userRoleType);
@@ -83,7 +83,6 @@ public class UserDaoImpl implements UserDao {
             } else {
                 resultset.next();
                 String userID = resultset.getString("U_ID");
-                //String userName = resultset.getString("U_USERNAME");
                 String firstName = resultset.getString("U_FIRSTNAME");
                 String lastName = resultset.getString("U_LASTNAME");
                 String email = resultset.getString("U_EMAIL");
@@ -110,8 +109,7 @@ public class UserDaoImpl implements UserDao {
                     "U_LASTNAME=?," +
                     "U_EMAIL=?" +
                     "WHERE U_ID=?");
-
-            //Need to add single quotes around userName
+            
             statement.setString(1, updatedUser.getFirstName());
             statement.setString(2, updatedUser.getLastName());
             statement.setString(3, updatedUser.getEmail());
