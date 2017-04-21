@@ -32,10 +32,7 @@ public class ExpenseDaoImpl implements ExpenseDao {
             statement.setString(5, newExpense.getIdAuthor());
 
             statement.setString(6, "");//new expense cannot be resolved
-            //statement.setString(6, newExpense.getResolver());//user should have manager ID...will implement user.getManager()
-
             statement.setString(7, newExpense.getType());
-
             statement.setString(8, "3");//set status to 3 for pending
 
             statement.executeUpdate();

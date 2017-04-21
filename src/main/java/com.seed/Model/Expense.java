@@ -11,6 +11,8 @@ public class Expense {
     private String type;
     private String status;
 
+    public Expense() {};
+
     public Expense (String expenseID, String amount, String descriptor, String submitted, String resolved, String idAuthor, String resolver, String type, String status){
         super();
         this.expenseID=expenseID;
