@@ -1,8 +1,6 @@
 package com.seed.Servlet;
 
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -49,13 +47,13 @@ public class Login extends HttpServlet {
                 session.setAttribute("userRoleType", user.getUserRoleType());
 
                 //Send user to either employee home or manager home depending on UR_ROLE in ERSIO.ERS_USER_ROLES
-
                 if (user.getUserRoleType().equals("employee")){
-                    response.sendRedirect("EmployeeHome.html");
+                    response.sendRedirect("Home.html");
                 }
                 else {
-                    response.sendRedirect("ManagerHome.html");
+                    response.sendRedirect("Home.html");
                 }
             }
         }
     }
+}

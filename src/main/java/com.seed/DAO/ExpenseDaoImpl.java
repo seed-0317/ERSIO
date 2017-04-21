@@ -25,10 +25,17 @@ public class ExpenseDaoImpl implements ExpenseDao {
             LocalDate localDate = LocalDate.now();
 
             statement.setString(3, localDate.toString());
+            //statement.setString(4, newExpense.getSubmitted()); //insert current date from Java
+
             statement.setString(4, "");//Resolved date is empty when created
+
             statement.setString(5, newExpense.getIdAuthor());
-            statement.setString(6, newExpense.getResolver());//user should have manager ID
+
+            statement.setString(6, "");//new expense cannot be resolved
+            //statement.setString(6, newExpense.getResolver());//user should have manager ID...will implement user.getManager()
+
             statement.setString(7, newExpense.getType());
+
             statement.setString(8, "3");//set status to 3 for pending
 
             statement.executeUpdate();
@@ -52,24 +59,22 @@ public class ExpenseDaoImpl implements ExpenseDao {
 
             ResultSet resultset = statement.executeQuery();
 
-            List<Expense> expenseList = new LinkedList<>();
-
             while(resultset.next()) {
                 String expenseID = resultset.getString("R_ID");
-                String amount = resultset.getString("R_AMOUNT");
-                String descriptor = resultset.getString("R_DESCRIPTOR");
+                String amount = resultset.getString("R_AMOUNT");//input
+                String descriptor = resultset.getString("R_DESCRIPTOR");//input
                 String submitted = resultset.getString("R_SUBMITTED");
                 String resolved = resultset.getString("R_RESOLVED");
                 String idAuthor = resultset.getString("U_ID_AUTHOR");
                 String resolver = resultset.getString("U_ID_RESOLVER");
-                String type = resultset.getString("RT_TYPE");
+                String type = resultset.getString("RT_TYPE");//input
                 String status = resultset.getString("RT_STATUS");
 
                 Expense temp = new Expense(expenseID, amount, descriptor,submitted,resolved, idAuthor, resolver, type, status);
 
-                expenseList.add(temp);
+                System.out.println(temp);
             }
-            return expenseList;
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -98,5 +103,6 @@ public class ExpenseDaoImpl implements ExpenseDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 }

@@ -9,4 +9,5 @@ public interface UserDao {
     List<User> retrieveUsers();
     User retrieveUser(String userID);
     void updateUser(User updatedUser);
+
 }

@@ -5,8 +5,7 @@ import com.seed.DAO.ExpenseDaoImpl;
 import com.seed.DAO.UserDao;
 import com.seed.DAO.UserDaoImpl;
 import com.seed.Model.User;
-import java.util.List;
-import java.util.Iterator;
+import com.seed.Model.Expense;
 
 public class BusinessLogic {
 
@@ -17,6 +16,7 @@ public class BusinessLogic {
      * @param userID
      * @return person object if logged in successfully, otherwise {@code null}
      */
+
     public User login(String userID) {
     if (userID == null || userID.isEmpty()) {
         // Could also: throw new IllegalArgumentException();
@@ -39,6 +39,11 @@ public class BusinessLogic {
 
         UserDao dao = new UserDaoImpl();
         dao.updateUser(updatedUser);
+    }
+
+    public void createExpense(Expense newExpense){
+        ExpenseDao dao = new ExpenseDaoImpl();
+        dao.createExpense(newExpense);
     }
 }
 
