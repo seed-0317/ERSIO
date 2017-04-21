@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.LinkedList;
 
 public class ExpenseDaoImpl implements ExpenseDao {
 
@@ -56,6 +57,8 @@ public class ExpenseDaoImpl implements ExpenseDao {
 
             ResultSet resultset = statement.executeQuery();
 
+
+            List<Expense> list = new LinkedList<>();
             while(resultset.next()) {
                 String expenseID = resultset.getString("R_ID");
                 String amount = resultset.getString("R_AMOUNT");//input
@@ -68,9 +71,9 @@ public class ExpenseDaoImpl implements ExpenseDao {
                 String status = resultset.getString("RT_STATUS");
 
                 Expense temp = new Expense(expenseID, amount, descriptor,submitted,resolved, idAuthor, resolver, type, status);
-
-                System.out.println(temp);
+                list.add(temp);
             }
+            return list;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -101,5 +104,25 @@ public class ExpenseDaoImpl implements ExpenseDao {
             e.printStackTrace();
         }
 
+    }
+    public List<String> retrieveExpenseTypes(){
+        try(Connection connection = ConnectionFactory.createConnection();){
+
+            PreparedStatement statement = connection.prepareStatement(
+                    "SELECT RT_TYPE FROM ERSIO.ERS_REIMBURSEMENT_TYPE GROUP BY 1");
+
+            ResultSet resultset = statement.executeQuery();
+            List<String> list = new LinkedList<>();
+
+            while(resultset.next()) {
+                String type = resultset.getString("RT_TYPE");
+                list.add(type);
+            }
+            return list;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
