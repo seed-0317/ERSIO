@@ -1,11 +1,7 @@
 package com.seed.Servlet;
 
-
 import com.seed.Model.Expense;
-import com.seed.Model.User;
 import com.seed.Service.BusinessLogic;
-import com.seed.Service.*;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,12 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet(value="/createexpense")
+@WebServlet(value="/CreateExpense")
 public class CreateExpense extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("CreateNewExpense.html").forward(request, response);
+        request.getRequestDispatcher("CreateExpense.html").forward(request, response);
     }
 
     @Override
@@ -39,14 +35,5 @@ public class CreateExpense extends HttpServlet {
         newExpense.setIdAuthor(idAuthor);
 
         businessLogic.createExpense(newExpense);
-
-
-                
-
-
-
-
-
-
     }
 }

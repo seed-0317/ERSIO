@@ -52,9 +52,9 @@ public class Login extends HttpServlet {
                     response.sendRedirect("EmployeeHome.html");
                 }
                 else {
-                    List<Expense> expenses = businessLogic.retrieveExpenses();
-                    session.setAttribute("expenses", expenses);
-                    response.sendRedirect("Home.html");
+                    //List<Expense> expenses = businessLogic.retrieveExpenses();
+                    //session.setAttribute("expenses", expenses);
+                    response.sendRedirect("ManagerHome.html");
                 }
             }
         }

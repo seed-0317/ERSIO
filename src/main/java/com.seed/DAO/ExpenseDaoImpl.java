@@ -50,11 +50,45 @@ public class ExpenseDaoImpl implements ExpenseDao {
                             "LEFT JOIN ERSIO.ERS_REIMBURSEMENT_TYPE B " +
                             "ON A.RT_TYPE=B.RT_ID " +
                             "LEFT JOIN ERSIO.ERS_REIMBURSEMENT_STATUS C " +
-                            "ON A.RT_STATUS=C.RS_STATUS");
+                            "ON A.RT_STATUS=C.RS_STATUS" +
+                            "WHERE RT_STATUS <> 3");
 
-            PreparedStatement statementNoJoins = connection.prepareStatement("SELECT R_ID, R_AMOUNT, R_DESCRIPTION, R_SUBMITTED, R_RESOLVED, U_ID_AUTHOR, U_ID_RESOLVER, RT_TYPE, RT_STATUS FROM ERSIO.ERS_REIMBURSEMENTS A");
+            PreparedStatement statementNoJoins = connection.prepareStatement("SELECT R_ID, R_AMOUNT, R_DESCRIPTION, R_SUBMITTED, R_RESOLVED, U_ID_AUTHOR, U_ID_RESOLVER, RT_TYPE, RT_STATUS " +
+                    "FROM ERSIO.ERS_REIMBURSEMENTS A" +
+                    "WHERE RT_STATUS <> 3");
 
             ResultSet resultset = statementNoJoins.executeQuery();
+
+            List<Expense> list = new LinkedList<>();
+            while(resultset.next()) {
+                String expenseID = resultset.getString("R_ID");
+                String amount = resultset.getString("R_AMOUNT");
+                String descriptor = resultset.getString("R_DESCRIPTION");
+                String submitted = resultset.getString("R_SUBMITTED");
+                String resolved = resultset.getString("R_RESOLVED");
+                String idAuthor = resultset.getString("U_ID_AUTHOR");
+                String resolver = resultset.getString("U_ID_RESOLVER");
+                String type = resultset.getString("RT_TYPE");
+                String status = resultset.getString("RT_STATUS");
+
+                Expense temp = new Expense(expenseID, amount, descriptor,submitted,resolved, idAuthor, resolver, type, status);
+                list.add(temp);
+            }
+            return list;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Expense> retrievePendingExpenses() {
+        try(Connection connection = ConnectionFactory.createConnection();){
+
+            PreparedStatement statement = connection.prepareStatement("SELECT R_ID, R_AMOUNT, R_DESCRIPTION, R_SUBMITTED, R_RESOLVED, U_ID_AUTHOR, U_ID_RESOLVER, RT_TYPE, RT_STATUS " +
+                    "FROM ERSIO.ERS_REIMBURSEMENTS A WHERE RT_STATUS = 3");
+
+            ResultSet resultset = statement.executeQuery();
 
             List<Expense> list = new LinkedList<>();
             while(resultset.next()) {

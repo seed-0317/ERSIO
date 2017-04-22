@@ -7,6 +7,7 @@ import com.seed.DAO.UserDaoImpl;
 import com.seed.Model.User;
 import com.seed.Model.Expense;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class BusinessLogic {
@@ -53,9 +54,47 @@ public class BusinessLogic {
         return dao.retrieveExpenses();
     }
 
+    public List<Expense> retrievePendingExpenses(){
+        ExpenseDao dao = new ExpenseDaoImpl();
+        return dao.retrievePendingExpenses();
+    }
+
     public List<String> retrieveExpenseTypes(){
         ExpenseDao dao = new ExpenseDaoImpl();
         return dao.retrieveExpenseTypes();
+    }
+
+    public List<User> retrieveUsers(){
+        UserDao dao = new UserDaoImpl();
+        return dao.retrieveUsers();
+    }
+
+    public List<Expense> retrieveExpenses(String IdAuthor){
+        List<Expense> list = retrieveExpenses();
+        Iterator<Expense> iter = list.listIterator();
+
+        Expense expense;
+        while(iter.hasNext()) {
+            expense = iter.next();
+            if (!expense.getIdAuthor().equals(IdAuthor)) {
+                list.remove(expense);
+            }
+        }
+        return list;
+    }
+
+    public List<Expense> retrievePendingExpenses(String IdAuthor){
+        List<Expense> list = retrievePendingExpenses();
+        Iterator<Expense> iter = list.listIterator();
+
+        Expense expense;
+        while(iter.hasNext()) {
+            expense = iter.next();
+            if (!expense.getIdAuthor().equals(IdAuthor)) {
+                list.remove(expense);
+            }
+        }
+        return list;
     }
 }
 
