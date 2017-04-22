@@ -32,7 +32,7 @@ public class UserDaoImpl implements UserDao {
     public List<User> retrieveUsers() {
         try (Connection connection = ConnectionFactory.createConnection();) {
 
-            PreparedStatement statement = connection.prepareStatement("select U_ID, U_USERNAME, U_FIRSTNAME, U_LASTNAME, U_EMAIL, U_MANAGER, B.UR_ROLE " +
+            PreparedStatement statement = connection.prepareStatement("select U_ID, U_USERNAME, U_FIRSTNAME, U_LASTNAME, U_EMAIL, reports_to as U_MANAGER, B.UR_ROLE " +
                     "from ERSIO.ERS_USERS A JOIN ERSIO.ERS_USER_ROLES B ON A.UR_ID = B.UR_ID");
 
             ResultSet resultset = statement.executeQuery();
@@ -69,7 +69,7 @@ public class UserDaoImpl implements UserDao {
     public User retrieveUser(String userName) {
         try (Connection connection = ConnectionFactory.createConnection();) {
 
-            PreparedStatement statement = connection.prepareStatement("select U_ID, U_USERNAME, U_FIRSTNAME, U_LASTNAME, U_EMAIL, U_MANAGER, B.UR_ROLE " +
+            PreparedStatement statement = connection.prepareStatement("select U_ID, U_USERNAME, U_FIRSTNAME, U_LASTNAME, U_EMAIL, reports_to as U_MANAGER, B.UR_ROLE " +
                     "from ERSIO.ERS_USERS A JOIN ERSIO.ERS_USER_ROLES B ON A.UR_ID = B.UR_ID " +
                     "WHERE U_USERNAME = ? ");
 

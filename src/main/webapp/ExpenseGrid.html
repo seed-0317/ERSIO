@@ -1,0 +1,19 @@
+<div>
+
+
+
+    <h1 class="text-center text-capitalize">Expenses<small>${thisUser.userRoleType}</small></h1>
+    <div class="container-fluid">
+        <#if expenses??>
+            <#list expenses as expense>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">person.name</div>
+                    <div class="col-xs-12 col-sm-6">person.age</div>
+                </div>
+            </#list>
+            <#/if>
+    </div>
+
+
+
+</div>

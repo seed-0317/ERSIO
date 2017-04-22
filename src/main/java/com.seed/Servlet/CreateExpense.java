@@ -15,7 +15,7 @@ public class CreateExpense extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("CreateExpense.html").forward(request, response);
+        request.getRequestDispatcher("ExpenseForm.html").forward(request, response);
     }
 
     @Override

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--IMPORT LIBRARIES-->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="resources/scripts/custom.js"></script>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+<link rel="stylesheet" type="text/css" href="resources/styles/custom.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+<!--Navigation Bar-->
+<div class="nav-side-menu">
+    <div class="brand">ERS.io</div>
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+    <div class="menu-list">
+        <ul id="menu-content" class="menu-content collapse out">
+            <li class="active servletLink">
+                <a href="#">
+                    <i class="fa fa-home fa-lg"></i> Home
+                </a>
+            </li>
+            <!--***IF MANAGER, INCLUDE EMPLOYEE NAVBAR BUTTON-->
+            <#if user.userRoleType = "manager">
+                <li id="empl_menu" data-toggle="collapse" data-target="#employees" class="collapsed">
+                    <a href="#"><i class="fa fa-users fa-lg"></i> Employees <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="employees">
+                    <li class = "servletLink"><a href="#">All Employees</a></li>
+                    <li class = "servletLink"><a href="#">Add Employee</a></li>
+                </ul>
+            </#if>
+            <!--*******-->
+            <li id="exp_menu" data-toggle="collapse" data-target="#expenses" class="collapsed">
+                <a href="#"><i class="fa fa-credit-card-alt fa-lg"></i> Expenses <span class="arrow"></span></a>
+            </li>
+            <ul class="sub-menu collapse" id="expenses">
+                <li class = "servletLink"><a href="#">All Expenses</a></li>
+                <!--*****IF EMPLOYEE, INCLUDE CREATE EXPENSE NAVBAR BUTTON-->
+                <#if user.userRoleType = "employee">
+                    <li class = "servletLink"><a href="#">Create Expense</a></li>
+                </#if>
+                <!--******-->
+            </ul>
+            <li class = "servletLink">
+                <a href="#">
+                    <i class="fa fa-user fa-lg"></i> Profile
+                </a>
+            </li>
+            <li class = "servletLink">
+                <a href="Login.html">
+                    <i class="fa fa-sign-out fa-lg"></i> Logout
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

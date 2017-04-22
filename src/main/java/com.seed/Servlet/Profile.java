@@ -15,7 +15,7 @@ public class Profile extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("Profile.html").forward(request, response);
+        request.getRequestDispatcher("UserGrid.html").forward(request, response);
     }
 
     @Override
@@ -39,6 +39,6 @@ public class Profile extends HttpServlet {
 
         businessLogic.updateUser(user);
 
-        request.getRequestDispatcher("EmployeeHome.html").forward(request, response);
+        request.getRequestDispatcher("Home.html").forward(request, response);
     }
 }

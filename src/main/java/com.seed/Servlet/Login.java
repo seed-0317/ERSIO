@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.seed.Model.*;
 import com.seed.Service.BusinessLogic;
+import com.sun.tools.internal.ws.wsdl.document.soap.SOAPUse;
 
 @WebServlet(value="/Login")
 public class Login extends HttpServlet {
@@ -47,14 +48,23 @@ public class Login extends HttpServlet {
                 session.setAttribute("manager", user.getManager());
                 session.setAttribute("userRoleType", user.getUserRoleType());
 
+                System.out.println(session.getAttribute("user"));
+                System.out.println(session.getAttribute("userName"));
+                System.out.println(session.getAttribute("userID"));
+                System.out.println(session.getAttribute("firstName"));
+                System.out.println(session.getAttribute("lastName"));
+                System.out.println(session.getAttribute("email"));
+                System.out.println(session.getAttribute("manager"));
+                System.out.println(session.getAttribute("userRoleType"));
+
                 //Send user to either employee home or manager home depending on UR_ROLE in ERSIO.ERS_USER_ROLES
                 if (user.getUserRoleType().equals("employee")){
-                    response.sendRedirect("EmployeeHome.html");
+                    response.sendRedirect("Body.html");
                 }
                 else {
                     //List<Expense> expenses = businessLogic.retrieveExpenses();
                     //session.setAttribute("expenses", expenses);
-                    response.sendRedirect("ManagerHome.html");
+                    response.sendRedirect("Body.html");
                 }
             }
         }
