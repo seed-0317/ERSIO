@@ -1,6 +1,7 @@
 package com.seed.Servlet;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import com.seed.Model.*;
 import com.seed.Service.BusinessLogic;
 
-@WebServlet(value="/login")
+@WebServlet(value="/Login")
 public class Login extends HttpServlet {
 
     @Override
@@ -36,7 +37,7 @@ public class Login extends HttpServlet {
                 response.sendRedirect("Login.html");
             }
             else{
-                session.setAttribute("thisUser", user);//adding user Object to session
+                session.setAttribute("authUser", user);//adding user Object to session
 
                 session.setAttribute("userName", userName);
                 session.setAttribute("userID", user.getUserID());
@@ -48,9 +49,11 @@ public class Login extends HttpServlet {
 
                 //Send user to either employee home or manager home depending on UR_ROLE in ERSIO.ERS_USER_ROLES
                 if (user.getUserRoleType().equals("employee")){
-                    response.sendRedirect("Home.html");
+                    response.sendRedirect("EmployeeHome.html");
                 }
                 else {
+                    List<Expense> expenses = businessLogic.retrieveExpenses();
+                    session.setAttribute("expenses", expenses);
                     response.sendRedirect("Home.html");
                 }
             }

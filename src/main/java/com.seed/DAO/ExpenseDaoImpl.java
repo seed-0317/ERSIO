@@ -24,14 +24,11 @@ public class ExpenseDaoImpl implements ExpenseDao {
 
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/DD/YYYY");
             LocalDate localDate = LocalDate.now();
-
             statement.setString(3, localDate.toString());
-            //statement.setString(4, newExpense.getSubmitted()); //insert current date from Java
 
             statement.setString(4, "");//Resolved date is empty when created
 
             statement.setString(5, newExpense.getIdAuthor());
-
             statement.setString(6, "");//new expense cannot be resolved
             statement.setString(7, newExpense.getType());
             statement.setString(8, "3");//set status to 3 for pending
@@ -55,19 +52,20 @@ public class ExpenseDaoImpl implements ExpenseDao {
                             "LEFT JOIN ERSIO.ERS_REIMBURSEMENT_STATUS C " +
                             "ON A.RT_STATUS=C.RS_STATUS");
 
-            ResultSet resultset = statement.executeQuery();
+            PreparedStatement statementNoJoins = connection.prepareStatement("SELECT R_ID, R_AMOUNT, R_DESCRIPTION, R_SUBMITTED, R_RESOLVED, U_ID_AUTHOR, U_ID_RESOLVER, RT_TYPE, RT_STATUS FROM ERSIO.ERS_REIMBURSEMENTS A");
 
+            ResultSet resultset = statementNoJoins.executeQuery();
 
             List<Expense> list = new LinkedList<>();
             while(resultset.next()) {
                 String expenseID = resultset.getString("R_ID");
-                String amount = resultset.getString("R_AMOUNT");//input
-                String descriptor = resultset.getString("R_DESCRIPTOR");//input
+                String amount = resultset.getString("R_AMOUNT");
+                String descriptor = resultset.getString("R_DESCRIPTION");
                 String submitted = resultset.getString("R_SUBMITTED");
                 String resolved = resultset.getString("R_RESOLVED");
                 String idAuthor = resultset.getString("U_ID_AUTHOR");
                 String resolver = resultset.getString("U_ID_RESOLVER");
-                String type = resultset.getString("RT_TYPE");//input
+                String type = resultset.getString("RT_TYPE");
                 String status = resultset.getString("RT_STATUS");
 
                 Expense temp = new Expense(expenseID, amount, descriptor,submitted,resolved, idAuthor, resolver, type, status);
@@ -103,7 +101,6 @@ public class ExpenseDaoImpl implements ExpenseDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
     public List<String> retrieveExpenseTypes(){
         try(Connection connection = ConnectionFactory.createConnection();){

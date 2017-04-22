@@ -7,6 +7,8 @@ import com.seed.DAO.UserDaoImpl;
 import com.seed.Model.User;
 import com.seed.Model.Expense;
 
+import java.util.List;
+
 public class BusinessLogic {
 
     public BusinessLogic() {
@@ -44,6 +46,16 @@ public class BusinessLogic {
     public void createExpense(Expense newExpense){
         ExpenseDao dao = new ExpenseDaoImpl();
         dao.createExpense(newExpense);
+    }
+
+    public List<Expense> retrieveExpenses(){
+        ExpenseDao dao = new ExpenseDaoImpl();
+        return dao.retrieveExpenses();
+    }
+
+    public List<String> retrieveExpenseTypes(){
+        ExpenseDao dao = new ExpenseDaoImpl();
+        return dao.retrieveExpenseTypes();
     }
 }
 
