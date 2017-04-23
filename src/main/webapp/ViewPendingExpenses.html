@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ViewPendingExpenses</title>
+</head>
+<body>
+
+<div class="container">
+    <#list expenses as exp >
+        <div class="row">
+
+            <div class="col-md-1 col-md-1 well">${exp.expenseID}</div>
+            <div class="col-md-1 col-md-1 well">${exp.amount}</div>
+            <div class="col-md-1 col-md-1 well">${exp.descriptor}</div>
+            <div class="col-md-1 col-md-1 well">${exp.submitted}</div>
+            <div class="col-md-1 col-md-1 well">${exp.resolved}</div>
+            <div class="col-md-1 col-md-1 well">${exp.idAuthor}</div>
+            <div class="col-md-1 col-md-1 well">${exp.resolver}</div>
+            <div class="col-md-1 col-md-1 well">${exp.type}</div>
+            <div class="col-md-1 col-md-1 well">${exp.status}</div>
+
+        </div>
+    </#list>
+</div>
+
+</body>
+</html>
