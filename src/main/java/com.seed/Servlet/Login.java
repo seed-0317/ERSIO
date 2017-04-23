@@ -37,7 +37,7 @@ public class Login extends HttpServlet {
                 response.sendRedirect("Login.html");
             }
             else{
-                session.setAttribute("authUser", user);//adding user Object to session
+                session.setAttribute("user", user);//adding user Object to session
 
                 session.setAttribute("userName", userName);
                 session.setAttribute("userID", user.getUserID());
