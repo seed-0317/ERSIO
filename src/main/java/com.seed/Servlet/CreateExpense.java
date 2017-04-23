@@ -15,20 +15,25 @@ public class CreateExpense extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session=request.getSession();
+
+        BusinessLogic businessLogic=new BusinessLogic();
+        session.setAttribute("expenseTypesMap",businessLogic.retrieveExpenseTypes());
+        session.setAttribute("expenseStatusMap",businessLogic.retrieveExpenseStatus());
         request.getRequestDispatcher("CreateExpense.html").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
-        String idAuthor= (String) session.getAttribute("userID");
+        int idAuthor= (int)session.getAttribute("userID");
 
-        String amount=request.getParameter("SubmitAmount");
+        double amount=Double.parseDouble(request.getParameter("SubmitAmount"));
         String descriptor=request.getParameter("SubmitDescriptor");
         String type=request.getParameter("SubmitType");
 
         BusinessLogic businessLogic=new BusinessLogic();
-        Expense newExpense =new Expense();
+        Expense newExpense = new Expense();
         newExpense.setAmount(amount);
         newExpense.setDescriptor(descriptor);
         newExpense.setType(type);

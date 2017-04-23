@@ -10,6 +10,7 @@ public class ConnectionFactory {
     private static final String USERNAME = System.getenv("CONNECTIONUSER");
     private static final String PASSWORD = System.getenv("CONNECTIONPASSWORD");
 
+
     public static Connection createConnection() {
         try {
             Class.forName("org.postgresql.Driver");

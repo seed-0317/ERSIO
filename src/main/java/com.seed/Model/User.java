@@ -1,15 +1,15 @@
 package com.seed.Model;
 
 public class User {
-    private String userID;
+    private int userID;
     private String userName;
     private String firstName;
     private String lastName;
     private String email;
-    private String manager;
+    private int manager;
     private String userRoleType;
 
-    public User (String userID, String userName, String firstName, String lastName, String  email, String manager, String userRoleType){
+    public User (int userID, String userName, String firstName, String lastName, String  email, int manager, String userRoleType){
         super();
         this.userID=userID;
         this.userName=userName;
@@ -20,11 +20,11 @@ public class User {
         this.userRoleType=userRoleType;
     }
 
-    public String getUserID() {
+    public int getUserID() {
         return userID;
     }
 
-    public void setUserID(String userID) {
+    public void setUserID(int userID) {
         this.userID = userID;
     }
 
@@ -60,11 +60,11 @@ public class User {
         this.email = email;
     }
 
-    public String getManager() {
+    public int getManager() {
         return manager;
     }
 
-    public void setManager(String manager) {
+    public void setManager(int manager) {
         this.manager = manager;
     }
 
@@ -83,23 +83,23 @@ public class User {
 
         User user = (User) o;
 
-        if (!userID.equals(user.userID)) return false;
-        if (userName != null ? !userName.equals(user.userName) : user.userName != null) return false;
-        if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
-        if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
-        if (email != null ? !email.equals(user.email) : user.email != null) return false;
-        if (manager != null ? !manager.equals(user.manager) : user.manager != null) return false;
+        if (userID != user.userID) return false;
+        if (manager != user.manager) return false;
+        if (!userName.equals(user.userName)) return false;
+        if (!firstName.equals(user.firstName)) return false;
+        if (!lastName.equals(user.lastName)) return false;
+        if (!email.equals(user.email)) return false;
         return userRoleType != null ? userRoleType.equals(user.userRoleType) : user.userRoleType == null;
     }
 
     @Override
     public int hashCode() {
-        int result = userID.hashCode();
-        result = 31 * result + (userName != null ? userName.hashCode() : 0);
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (manager != null ? manager.hashCode() : 0);
+        int result = userID;
+        result = 31 * result + userName.hashCode();
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + email.hashCode();
+        result = 31 * result + manager;
         result = 31 * result + (userRoleType != null ? userRoleType.hashCode() : 0);
         return result;
     }

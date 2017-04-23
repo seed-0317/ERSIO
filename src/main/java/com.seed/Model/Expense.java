@@ -1,36 +1,31 @@
 package com.seed.Model;
 
 public class Expense {
-    private String expenseID;
-    private String amount;
+    private double amount;
     private String descriptor;
     private String submitted;
     private String resolved;
-    private String idAuthor;
-    private String resolver;
+    private int idAuthor;
+    private int resolver;
     private String type;
     private String status;
 
-    public Expense() {};
+    public Expense() {
+    }
 
-    public Expense (String expenseID, String amount, String descriptor, String submitted, String resolved, String idAuthor, String resolver, String type, String status){
+    public Expense(double amount, String descriptor, String submitted, String resolved, int idAuthor, int resolver, String type, String status) {
         super();
-        this.expenseID=expenseID;
-        this.amount=amount;
-        this.descriptor=descriptor;
-        this.submitted=submitted;
-        this.resolved=resolved;
-        this.idAuthor=idAuthor;
-        this.resolver=resolver;
-        this.type=type;
-        this.status=status;
+        this.amount = amount;
+        this.descriptor = descriptor;
+        this.submitted = submitted;
+        this.resolved = resolved;
+        this.idAuthor = idAuthor;
+        this.resolver = resolver;
+        this.type = type;
+        this.status = status;
     }
 
-    public String getExpenseID() {
-        return expenseID;
-    }
-
-    public String getAmount() {
+    public double getAmount() {
         return amount;
     }
 
@@ -46,11 +41,11 @@ public class Expense {
         return resolved;
     }
 
-    public String getIdAuthor() {
+    public int getIdAuthor() {
         return idAuthor;
     }
 
-    public String getResolver() {
+    public int getResolver() {
         return resolver;
     }
 
@@ -62,11 +57,7 @@ public class Expense {
         return status;
     }
 
-    public void setExpenseID(String expenseID) {
-        this.expenseID = expenseID;
-    }
-
-    public void setAmount(String amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
@@ -82,11 +73,11 @@ public class Expense {
         this.resolved = resolved;
     }
 
-    public void setIdAuthor(String idAuthor) {
+    public void setIdAuthor(int idAuthor) {
         this.idAuthor = idAuthor;
     }
 
-    public void setResolver(String resolver) {
+    public void setResolver(int resolver) {
         this.resolver = resolver;
     }
 
@@ -105,26 +96,27 @@ public class Expense {
 
         Expense expense = (Expense) o;
 
-        if (!expenseID.equals(expense.expenseID)) return false;
-        if (!amount.equals(expense.amount)) return false;
+        if (Double.compare(expense.amount, amount) != 0) return false;
+        if (idAuthor != expense.idAuthor) return false;
+        if (resolver != expense.resolver) return false;
         if (descriptor != null ? !descriptor.equals(expense.descriptor) : expense.descriptor != null) return false;
-        if (submitted != null ? !submitted.equals(expense.submitted) : expense.submitted != null) return false;
+        if (!submitted.equals(expense.submitted)) return false;
         if (resolved != null ? !resolved.equals(expense.resolved) : expense.resolved != null) return false;
-        if (idAuthor != null ? !idAuthor.equals(expense.idAuthor) : expense.idAuthor != null) return false;
-        if (resolver != null ? !resolver.equals(expense.resolver) : expense.resolver != null) return false;
         if (type != null ? !type.equals(expense.type) : expense.type != null) return false;
         return status != null ? status.equals(expense.status) : expense.status == null;
     }
 
     @Override
     public int hashCode() {
-        int result = expenseID.hashCode();
-        result = 31 * result + amount.hashCode();
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(amount);
+        result = (int) (temp ^ (temp >>> 32));
         result = 31 * result + (descriptor != null ? descriptor.hashCode() : 0);
-        result = 31 * result + (submitted != null ? submitted.hashCode() : 0);
+        result = 31 * result + submitted.hashCode();
         result = 31 * result + (resolved != null ? resolved.hashCode() : 0);
-        result = 31 * result + (idAuthor != null ? idAuthor.hashCode() : 0);
-        result = 31 * result + (resolver != null ? resolver.hashCode() : 0);
+        result = 31 * result + idAuthor;
+        result = 31 * result + resolver;
         result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
@@ -133,17 +125,15 @@ public class Expense {
     @Override
     public String toString() {
         return "Expense{" +
-                "expenseID='" + expenseID + '\'' +
-                ", amount='" + amount + '\'' +
+                ", amount=" + amount +
                 ", descriptor='" + descriptor + '\'' +
                 ", submitted='" + submitted + '\'' +
                 ", resolved='" + resolved + '\'' +
-                ", idAuthor='" + idAuthor + '\'' +
+                ", idAuthor=" + idAuthor +
                 ", resolver='" + resolver + '\'' +
                 ", type='" + type + '\'' +
                 ", status='" + status + '\'' +
                 '}';
     }
 }
-
 
