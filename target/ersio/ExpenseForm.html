@@ -1,0 +1,27 @@
+
+
+<div>
+<h3>Submit a new expense reimbursement request:</h3>
+
+
+<form action="/createexpense" method="post">
+    <div class="form-group">
+        <label for ="SubmitAmount">Amount</label>
+        <input type="number" class="form-control" id="SubmitAmount" min="0">
+    </div>
+    <div class="form-group">
+        <label for="SubmitDescriptor">Description</label>
+        <input type="text" class="form-control" id="SubmitDescriptor">
+    </div>
+    <div class="form-group">
+        <label for="SubmitType">Expense Type</label>
+        <select class="form-control" id="SubmitType">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+</div>
