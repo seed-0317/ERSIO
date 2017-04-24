@@ -73,7 +73,7 @@ public class ExpenseDaoImpl implements ExpenseDao {
                 String type = resultset.getString("RT_TYPE");
                 String status = resultset.getString("RT_STATUS");
 
-                Expense temp = new Expense(amount, descriptor, submitted, resolved, idAuthor, resolver, type, status);
+                Expense temp = new Expense(expenseID, amount, descriptor, submitted, resolved, idAuthor, resolver, type, status);
                 list.add(temp);
             }
             return list;
@@ -126,19 +126,18 @@ public class ExpenseDaoImpl implements ExpenseDao {
         return null;
     }
 
-    public void resolveExpense(String R_ID, String RS_STATUS, String managerUserName){
+    public void resolveExpense(String R_ID, String RS_STATUS){
         try(Connection connection = ConnectionFactory.createConnection();){
 
-            PreparedStatement statement = connection.prepareStatement("update ERSIO.ERS_REIMBURSEMENTS A" +
+            PreparedStatement statement = connection.prepareStatement("update ERSIO.ERS_REIMBURSEMENTS A " +
                     "SET RT_STATUS=?," +
-                    "U_ID_RESOLVER=?," +
                     "R_RESOLVED=?" +
                     "WHERE R_ID=?");
 
             statement.setString(1, RS_STATUS);
-            statement.setString(2, managerUserName);
-            statement.setString(3, currentDate());
-            statement.setString(4, R_ID);
+            //statement.setString(2, managerUserName);
+            statement.setString(2, currentDate());
+            statement.setString(3, R_ID);
 
             statement.executeUpdate();
 

@@ -1,6 +1,7 @@
 package com.seed.Model;
 
 public class Expense {
+    private int r_id;
     private double amount;
     private String descriptor;
     private String submitted;
@@ -13,8 +14,21 @@ public class Expense {
     public Expense() {
     }
 
-    public Expense(double amount, String descriptor, String submitted, String resolved, int idAuthor, int resolver, String type, String status) {
+    public Expense( double amount, String descriptor, String submitted, String resolved, int idAuthor, int resolver, String type, String status) {
         super();
+        this.amount = amount;
+        this.descriptor = descriptor;
+        this.submitted = submitted;
+        this.resolved = resolved;
+        this.idAuthor = idAuthor;
+        this.resolver = resolver;
+        this.type = type;
+        this.status = status;
+    }
+
+    public Expense(int r_id, double amount, String descriptor, String submitted, String resolved, int idAuthor, int resolver, String type, String status) {
+        super();
+        this.r_id=r_id;
         this.amount = amount;
         this.descriptor = descriptor;
         this.submitted = submitted;
@@ -87,6 +101,14 @@ public class Expense {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getR_id() {
+        return r_id;
+    }
+
+    public void setR_id(int r_id) {
+        this.r_id = r_id;
     }
 
     @Override
