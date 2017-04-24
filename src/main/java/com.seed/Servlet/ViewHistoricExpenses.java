@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(value="/ViewHistoricExpenses")
+@WebServlet(value="/AllExpenses")
 public class ViewHistoricExpenses extends HttpServlet {
 
     @Override
@@ -31,6 +31,6 @@ public class ViewHistoricExpenses extends HttpServlet {
 
         session.setAttribute("expenses", expenses);
 
-        request.getRequestDispatcher("ViewExpenses.html").forward(request, response);
+        request.getRequestDispatcher("ExpenseGrid.html").forward(request, response);
     }
 }

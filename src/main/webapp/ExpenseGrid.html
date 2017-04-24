@@ -1,0 +1,44 @@
+<div>
+
+    <h3>Expenses</h3>
+    You may view your recent expenses below: <br><br>
+
+    <div class="container" style="margin-left: 0px">
+        <table class="table table-bordered" align="left">
+            <thead>
+            <tr>
+                <th>Amount</th>
+                <th>Description</th>
+                <th>Submitted</th>
+                <th>Resolved</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <#list expenses as expenses>
+                <tr>
+                    <td>${expenses.amount!""}</td>
+                    <td>${expenses.descriptor!""}</td>
+                    <td>${expenses.submitted!""}</td>
+                    <td>${expenses.resolved!""}</td>
+                    <td>${expenses.type!""}</td>
+                    <td>${expenses.status!""}</td>
+                    <td>
+                        <div class="form-group div40">
+                            <!--<label for="SubmitType"></label> -->
+                            <select typeof="text">
+                                <option>Pending</option>
+                                <option>Approve</option>
+                                <option>Deny</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+            </#list>
+            </tbody>
+        </table>
+    </div>
+
+</div>
