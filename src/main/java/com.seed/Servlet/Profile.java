@@ -20,25 +20,28 @@ public class Profile extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        String email = request.getParameter("email");
+        String firstName = request.getParameter("firstNameForm");
+        String lastName = request.getParameter("lastNameForm");
+        String email = request.getParameter("emailForm");
 
         HttpSession session = request.getSession();
-        session.setAttribute("firstName", firstName);
-        session.setAttribute("lastName", lastName);
-        session.setAttribute("email", email);
+        User user = (User) session.getAttribute("user");
 
-        User user = (User) session.getAttribute("authUser");
-
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setEmail(email);
+        if (firstName !=null && !firstName.equals(session.getAttribute("firstName"))){
+            session.setAttribute("firstName", firstName);
+            user.setFirstName(firstName);
+        }
+        if (lastName !=null && !lastName.equals(session.getAttribute("lastName"))){
+            session.setAttribute("lastName", lastName);
+            user.setLastName(lastName);
+        }
+        if (email !=null && !email.equals(session.getAttribute("email"))){
+            session.setAttribute("email", email);
+            user.setEmail(email);
+        }
 
         BusinessLogic businessLogic = new BusinessLogic();
-
         businessLogic.updateUser(user);
-
         request.getRequestDispatcher("EmployeeHome.html").forward(request, response);
     }
 }

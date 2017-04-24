@@ -5,11 +5,35 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class ExpenseDaoImpl implements ExpenseDao {
+
+    private String currentDate(){
+        SimpleDateFormat sdfDate = new SimpleDateFormat("MM/dd/yyyy");
+        return sdfDate.format(new Date());
+    }
+    private int expenseTypeLookup(String key){
+        Map<String,Integer> map = retrieveExpenseTypes();
+        return map.get(key);//unboxing...doesn't require intValue()
+    }
+    private int managerLookup(int employeeID){
+        try(Connection connection = ConnectionFactory.createConnection();){
+
+            PreparedStatement statement = connection.prepareStatement("SELECT U_MANAGER FROM ERSIO.ERS_USERS WHERE U_ID = ?");
+
+            statement.setInt(1, employeeID);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getInt("U_MANAGER");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 
     @Override
     public void createExpense(Expense newExpense) {
@@ -20,16 +44,11 @@ public class ExpenseDaoImpl implements ExpenseDao {
                     "values(?, ?, ?, ?, ?, ?, ?, ?)");
             statement.setDouble(1, newExpense.getAmount());
             statement.setString(2, newExpense.getDescriptor());
-
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/DD/YYYY");
-            Date localDate = java.sql.Date.valueOf(java.time.LocalDate.now().format(dtf));
-            statement.setString(3, localDate.toString());
-
+            statement.setString(3, currentDate());
             statement.setString(4, "");//Resolved date is empty when created
-
             statement.setInt(5, newExpense.getIdAuthor());
-            statement.setString(6, "");//new expense cannot be resolved
-            statement.setString(7, newExpense.getType());
+            statement.setInt(6, managerLookup(newExpense.getIdAuthor()));//new expense cannot be resolved
+            statement.setInt(7, expenseTypeLookup(newExpense.getType()));
             statement.setInt(8, 3);//set status to 3 for pending
 
             statement.executeUpdate();
@@ -116,12 +135,9 @@ public class ExpenseDaoImpl implements ExpenseDao {
                     "R_RESOLVED=?" +
                     "WHERE R_ID=?");
 
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/DD/YYYY");
-            LocalDate localDate = LocalDate.now();
-
             statement.setString(1, RS_STATUS);
             statement.setString(2, managerUserName);
-            statement.setString(3, localDate.toString());
+            statement.setString(3, currentDate());
             statement.setString(4, R_ID);
 
             statement.executeUpdate();
@@ -131,7 +147,7 @@ public class ExpenseDaoImpl implements ExpenseDao {
         }
     }
 
-    public Map<Integer, String> retrieveExpenseTypes(){
+    public Map<String, Integer> retrieveExpenseTypes(){
         try(Connection connection = ConnectionFactory.createConnection();){
 
             PreparedStatement statement = connection.prepareStatement(
@@ -139,12 +155,12 @@ public class ExpenseDaoImpl implements ExpenseDao {
 
             ResultSet resultset = statement.executeQuery();
 
-            Map<Integer,String> map = new HashMap<>();
+            Map<String,Integer> map = new HashMap<>();
 
             while(resultset.next()) {
-                Integer key = Integer.valueOf(resultset.getInt("RT_ID"));
-                String type = resultset.getString("RT_TYPE");
-                map.put(key,type);
+                Integer value = Integer.valueOf(resultset.getInt("RT_ID"));
+                String key = resultset.getString("RT_TYPE");
+                map.put(key,value);
             }
             return map;
 
@@ -154,7 +170,7 @@ public class ExpenseDaoImpl implements ExpenseDao {
         return null;
     }
 
-    public Map<Integer, String> retrieveExpenseStatus(){
+    public Map<String, Integer> retrieveExpenseStatus(){
         try(Connection connection = ConnectionFactory.createConnection();){
 
             PreparedStatement statement = connection.prepareStatement(
@@ -162,12 +178,12 @@ public class ExpenseDaoImpl implements ExpenseDao {
 
             ResultSet resultset = statement.executeQuery();
 
-            Map<Integer,String> map = new HashMap<>();
+            Map<String, Integer> map = new HashMap<>();
 
             while(resultset.next()) {
-                Integer key = Integer.valueOf(resultset.getInt("RS_ID"));
-                String status = resultset.getString("RS_STATUS");
-                map.put(key,status);
+                Integer value = Integer.valueOf(resultset.getInt("RS_ID"));
+                String key = resultset.getString("RS_STATUS");
+                map.put(key,value);
             }
             return map;
 

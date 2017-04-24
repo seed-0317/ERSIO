@@ -105,19 +105,18 @@ public class UserDaoImpl implements UserDao {
     public void updateUser(User updatedUser) {
         try (Connection connection = ConnectionFactory.createConnection();) {
 
-            PreparedStatement statement = connection.prepareStatement("UPDATE ERSIO.ERS_USERS A" +
-                    "SET U_FIRSTNAME=?," +
-                    "U_LASTNAME=?," +
-                    "U_EMAIL=?" +
+            PreparedStatement statement = connection.prepareStatement("UPDATE ERSIO.ERS_USERS A " +
+                    "SET U_FIRSTNAME = ?, " +
+                    "U_LASTNAME=?, " +
+                    "U_EMAIL=? " +
                     "WHERE U_ID=?");
 
-            //Need to add single quotes around userName
             statement.setString(1, updatedUser.getFirstName());
             statement.setString(2, updatedUser.getLastName());
             statement.setString(3, updatedUser.getEmail());
             statement.setInt(4, updatedUser.getUserID());
 
-            ResultSet resultset = statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -66,12 +66,12 @@ public class BusinessLogic {
         return dao.retrievePendingExpenses();
     }
 
-    public Map<Integer,String> retrieveExpenseTypes(){
+    public Map<String,Integer> retrieveExpenseTypes(){
         ExpenseDao dao = new ExpenseDaoImpl();
         return dao.retrieveExpenseTypes();
     }
 
-    public Map<Integer,String> retrieveExpenseStatus(){
+    public Map<String,Integer> retrieveExpenseStatus(){
         ExpenseDao dao = new ExpenseDaoImpl();
         return dao.retrieveExpenseStatus();
     }
