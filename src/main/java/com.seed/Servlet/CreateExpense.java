@@ -28,8 +28,7 @@ public class CreateExpense extends HttpServlet {
         List<String> list = new ArrayList(set);
         session.setAttribute("expenseTypes",list);
 
-        response.sendRedirect("CreateExpense.html");
-        //request.getRequestDispatcher("CreateExpense.html").forward(request, response);
+        response.sendRedirect("ExpenseForm.html");
     }
 
     @Override
@@ -51,6 +50,6 @@ public class CreateExpense extends HttpServlet {
 
         businessLogic.createExpense(newExpense);
 
-        response.sendRedirect("EmployeeHome.html");
+        response.sendRedirect("Home.html");
     }
 }

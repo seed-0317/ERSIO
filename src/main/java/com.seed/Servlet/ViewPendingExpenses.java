@@ -31,6 +31,6 @@ public class ViewPendingExpenses extends HttpServlet {
 
         session.setAttribute("expenses", expenses);
 
-        request.getRequestDispatcher("ViewExpenses.html").forward(request, response);
+        request.getRequestDispatcher("ExpenseGrid.html").forward(request, response);
     }
 }

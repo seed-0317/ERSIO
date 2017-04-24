@@ -1,0 +1,13 @@
+<div>
+    <h1 class="text-center text-capitalize">Profile<small>small text</small></h1>
+    <div class="container-fluid">
+        <#if employees??>
+            <#list employees as profile>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">${profile.firstName}</div>
+                    <div class="col-xs-12 col-sm-6">${profile.userRoleType}</div>
+                </div>
+            </#list>
+            <#/if>
+    </div>
+</div>
