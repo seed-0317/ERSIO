@@ -22,6 +22,6 @@ public class ViewPendingExpenses extends HttpServlet {
         HttpSession session = request.getSession();
         session.setAttribute("expenses", expenses);
 
-        request.getRequestDispatcher("Expenses.html").forward(request, response);
+        request.getRequestDispatcher("ViewExpenses.html").forward(request, response);
     }
 }

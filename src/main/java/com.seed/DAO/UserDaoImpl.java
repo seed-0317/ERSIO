@@ -18,8 +18,8 @@ public class UserDaoImpl implements UserDao {
             statement.setString(2, newUser.getFirstName());
             statement.setString(3, newUser.getLastName());
             statement.setString(4, newUser.getEmail());
-            statement.setString(5, newUser.getManager());
-            statement.setString(6, "1");//only able to create employees
+            statement.setInt(5, newUser.getManager());
+            statement.setInt(6, 1);//only able to create employees
 
             statement.executeUpdate();
 
@@ -43,12 +43,12 @@ public class UserDaoImpl implements UserDao {
                 List<User> users = new LinkedList<>();
 
                 while (resultset.next()) {
-                    String userID = resultset.getString("U_ID");
+                    int userID = resultset.getInt("U_ID");
                     String userName = resultset.getString("U_USERNAME");
                     String firstName = resultset.getString("U_FIRSTNAME");
                     String lastName = resultset.getString("U_LASTNAME");
                     String email = resultset.getString("U_EMAIL");
-                    String manager = resultset.getString("U_MANAGER");//add U_MANAGER
+                    int manager = resultset.getInt("U_MANAGER");
                     String userRoleType = resultset.getString("UR_ROLE");
 
                     User temp = new User(userID, userName, firstName, lastName, email, manager, userRoleType);
@@ -82,12 +82,12 @@ public class UserDaoImpl implements UserDao {
                 return null;
             } else {
                 resultset.next();
-                String userID = resultset.getString("U_ID");
+                int userID = resultset.getInt("U_ID");
                 //String userName = resultset.getString("U_USERNAME");
                 String firstName = resultset.getString("U_FIRSTNAME");
                 String lastName = resultset.getString("U_LASTNAME");
                 String email = resultset.getString("U_EMAIL");
-                String manager = resultset.getString("U_MANAGER");
+                int manager = resultset.getInt("U_MANAGER");
                 String userRoleType = resultset.getString("UR_ROLE");
 
                 User user = new User(userID, userName, firstName, lastName, email, manager, userRoleType);
@@ -105,19 +105,18 @@ public class UserDaoImpl implements UserDao {
     public void updateUser(User updatedUser) {
         try (Connection connection = ConnectionFactory.createConnection();) {
 
-            PreparedStatement statement = connection.prepareStatement("UPDATE ERSIO.ERS_USERS A" +
-                    "SET U_FIRSTNAME=?," +
-                    "U_LASTNAME=?," +
-                    "U_EMAIL=?" +
+            PreparedStatement statement = connection.prepareStatement("UPDATE ERSIO.ERS_USERS A " +
+                    "SET U_FIRSTNAME = ?, " +
+                    "U_LASTNAME=?, " +
+                    "U_EMAIL=? " +
                     "WHERE U_ID=?");
 
-            //Need to add single quotes around userName
             statement.setString(1, updatedUser.getFirstName());
             statement.setString(2, updatedUser.getLastName());
             statement.setString(3, updatedUser.getEmail());
-            statement.setString(4, updatedUser.getUserID());
+            statement.setInt(4, updatedUser.getUserID());
 
-            ResultSet resultset = statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
