@@ -15,6 +15,11 @@ import com.seed.Service.BusinessLogic;
 public class Login extends HttpServlet {
 
     @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        response.sendRedirect("Login.html");
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String userName = request.getParameter("userNameForm");

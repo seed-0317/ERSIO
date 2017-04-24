@@ -17,9 +17,18 @@ public class ViewPendingExpenses extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         BusinessLogic businessLogic = new BusinessLogic();
-        List<Expense> expenses = businessLogic.retrievePendingExpenses();
-
         HttpSession session = request.getSession();
+        String userRoleType=(String)session.getAttribute("userRoleType");
+        int userID=(int)session.getAttribute("userID");
+
+        List<Expense> expenses;
+        if (userRoleType.equals("employee")){
+            expenses = businessLogic.retrievePendingExpensesByAuthor(userID);
+        }
+        else{
+            expenses = businessLogic.retrievePendingExpensesByManager(userID);
+        }
+
         session.setAttribute("expenses", expenses);
 
         request.getRequestDispatcher("ViewExpenses.html").forward(request, response);

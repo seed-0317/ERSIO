@@ -76,12 +76,12 @@ public class BusinessLogic {
         return dao.retrieveExpenseStatus();
     }
 
-    public List<User> retrieveUsers(){
+    public List<User> retrieveUsers(int managerID){
         UserDao dao = new UserDaoImpl();
-        return dao.retrieveUsers();
+        return dao.retrieveUsers(managerID);
     }
 
-    public List<Expense> retrieveExpenses(int IdAuthor){
+    public List<Expense> retrieveExpensesByAuthor(int IdAuthor){
         List<Expense> list = retrieveExpenses();
         Iterator<Expense> iter = list.listIterator();
 
@@ -95,7 +95,7 @@ public class BusinessLogic {
         return list;
     }
 
-    public List<Expense> retrievePendingExpenses(int IdAuthor){
+    public List<Expense> retrievePendingExpensesByAuthor(int IdAuthor){
         List<Expense> list = retrievePendingExpenses();
         Iterator<Expense> iter = list.listIterator();
 
@@ -104,6 +104,34 @@ public class BusinessLogic {
             expense = iter.next();
             if (expense.getIdAuthor()!=IdAuthor) {
                 list.remove(expense);
+            }
+        }
+        return list;
+    }
+
+    public List<Expense> retrieveExpensesByManager(int managerID){
+        List<Expense> list = retrieveExpenses();
+        Iterator<Expense> iter = list.listIterator();
+
+        Expense expense;
+        while(iter.hasNext()) {
+            expense = iter.next();
+            if (expense.getResolver()!=managerID) {
+                iter.remove();
+            }
+        }
+        return list;
+    }
+
+    public List<Expense> retrievePendingExpensesByManager(int managerID){
+        List<Expense> list = retrievePendingExpenses();
+        Iterator<Expense> iter = list.listIterator();
+
+        Expense expense;
+        while(iter.hasNext()) {
+            expense = iter.next();
+            if (expense.getResolver()!=managerID) {
+                iter.remove();
             }
         }
         return list;

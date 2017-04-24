@@ -29,14 +29,15 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> retrieveUsers() {
+    public List<User> retrieveUsers(int managerID) {
         try (Connection connection = ConnectionFactory.createConnection();) {
 
             PreparedStatement statement = connection.prepareStatement("select U_ID, U_USERNAME, U_FIRSTNAME, U_LASTNAME, U_EMAIL, U_MANAGER, B.UR_ROLE " +
-                    "from ERSIO.ERS_USERS A JOIN ERSIO.ERS_USER_ROLES B ON A.UR_ID = B.UR_ID");
+                    "from ERSIO.ERS_USERS A JOIN ERSIO.ERS_USER_ROLES B ON A.UR_ID = B.UR_ID " +
+                    "WHERE U_MANAGER=?");
 
+            statement.setInt(1,managerID);
             ResultSet resultset = statement.executeQuery();
-
             if (resultset == null) {
                 return null;
             } else {
@@ -52,9 +53,7 @@ public class UserDaoImpl implements UserDao {
                     String userRoleType = resultset.getString("UR_ROLE");
 
                     User temp = new User(userID, userName, firstName, lastName, email, manager, userRoleType);
-
                     users.add(temp);
-                    System.out.println(temp);
                 }
                 return users;
             }

@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @WebServlet(value="/CreateExpense")
 public class CreateExpense extends HttpServlet {
@@ -19,6 +22,11 @@ public class CreateExpense extends HttpServlet {
         HttpSession session=request.getSession();
 
         BusinessLogic businessLogic=new BusinessLogic();
+
+        Map<String, Integer> map = businessLogic.retrieveExpenseTypes();
+        Set<String> set = map.keySet();
+        List<String> list = new ArrayList(set);
+        session.setAttribute("expenseTypes",list);
 
         response.sendRedirect("CreateExpense.html");
         //request.getRequestDispatcher("CreateExpense.html").forward(request, response);

@@ -6,7 +6,7 @@ import java.util.List;
 public interface UserDao {
 
     void createUser(User newUser);
-    List<User> retrieveUsers();
+    List<User> retrieveUsers(int managerID);
     User retrieveUser(String userID);
     void updateUser(User updatedUser);
 

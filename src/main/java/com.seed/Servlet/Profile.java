@@ -26,22 +26,26 @@ public class Profile extends HttpServlet {
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
+        User oldUser=user;
 
-        if (firstName !=null && !firstName.equals(session.getAttribute("firstName"))){
+        if (!firstName.equals("") && !firstName.equals(session.getAttribute("firstName"))){
             session.setAttribute("firstName", firstName);
             user.setFirstName(firstName);
         }
-        if (lastName !=null && !lastName.equals(session.getAttribute("lastName"))){
+        if (!lastName.equals("") && !lastName.equals(session.getAttribute("lastName"))){
             session.setAttribute("lastName", lastName);
             user.setLastName(lastName);
         }
-        if (email !=null && !email.equals(session.getAttribute("email"))){
+        if (!email.equals("") && !email.equals(session.getAttribute("email"))){
             session.setAttribute("email", email);
             user.setEmail(email);
         }
 
         BusinessLogic businessLogic = new BusinessLogic();
-        businessLogic.updateUser(user);
+
+        if (!user.equals(oldUser)){
+            businessLogic.updateUser(user);
+        }
         request.getRequestDispatcher("EmployeeHome.html").forward(request, response);
     }
 }

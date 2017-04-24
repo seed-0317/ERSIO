@@ -18,13 +18,13 @@
 </head>
 <body style="margin-left: 10px">
 
-<h3> Welcome ${user.firstName!Employee}</h3>
-Please select from the options below. <br><br>
+<h3> Welcome ${user.firstName!"Manager"}</h3>
+Please select from the options below. <br> <br>
 
-<button class="btn btn-info btn-lg" formmethod="get" onclick="window.location.href='/Profile'">Edit/View Profile</button>
+
+<button class="btn btn-info btn-lg" formmethod="get" onclick="window.location.href='/ViewEmployees'">View Employees</button>
 <button class="btn btn-info btn-lg" formmethod="get" onclick="window.location.href='/ViewPendingExpenses'">View Pending Expenses</button>
 <button class="btn btn-info btn-lg" formmethod="get" onclick="window.location.href='/ViewHistoricExpenses'">View Historic Expenses</button>
-<button class="btn btn-info btn-lg" formmethod="get" onclick="window.location.href='/CreateExpense'">Create Expense</button>
 
 </body>
 </html>

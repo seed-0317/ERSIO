@@ -17,10 +17,11 @@ public class ViewEmployees extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        BusinessLogic businessLogic = new BusinessLogic();
-        List<User> employees = businessLogic.retrieveUsers();
-
         HttpSession session = request.getSession();
+
+        BusinessLogic businessLogic = new BusinessLogic();
+        List<User> employees = businessLogic.retrieveUsers((int)session.getAttribute("userID"));
+
         session.setAttribute("employees",employees);
 
         request.getRequestDispatcher("ViewEmployees.html").forward(request, response);
