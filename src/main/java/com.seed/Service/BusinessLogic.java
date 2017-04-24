@@ -31,10 +31,10 @@ public class BusinessLogic {
         return user;
         }
     }
-    public void resolveReimbursement(String RS_ID, String RS_STATUS, String managerUserName){
+    public void resolveReimbursement(String RS_ID, String RS_STATUS){
         //update ERSIO.ERS_REIMBURSEMENT_STATUS based on the parameters in the method signature
         ExpenseDao dao = new ExpenseDaoImpl();
-        dao.resolveExpense(RS_ID, RS_STATUS, managerUserName);
+        dao.resolveExpense(RS_ID, RS_STATUS);
     }
 
     public void createUser(User newUser){
