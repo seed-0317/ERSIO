@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(value="/AllEmployees")
+@WebServlet(value="/ViewEmployees")
 public class ViewEmployees extends HttpServlet {
 
     @Override
