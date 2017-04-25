@@ -15,7 +15,7 @@ public class Profile extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("UserGrid.html").forward(request, response);
+        request.getRequestDispatcher("Profile.html").forward(request, response);
     }
 
     @Override

@@ -16,16 +16,15 @@ public class Login extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        response.sendRedirect("Login.html");
+        request.getRequestDispatcher("Login.html").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String userName = request.getParameter("userNameForm");
 
         if(userName == null) {
-            response.sendRedirect("Login.html");
+            request.getRequestDispatcher("Login.html").forward(request, response);
         } else {
             HttpSession session = request.getSession();
 
@@ -34,7 +33,7 @@ public class Login extends HttpServlet {
 
             User user = businessLogic.login(userName);
             if (user == null){
-                response.sendRedirect("Login.html");
+                request.getRequestDispatcher("Login.html").forward(request, response);
             }
             else{
                 session.setAttribute("user", user);//adding user Object to session
@@ -49,12 +48,12 @@ public class Login extends HttpServlet {
 
                 //Send user to either employee home or manager home depending on UR_ROLE in ERSIO.ERS_USER_ROLES
                 if (user.getUserRoleType().equals("employee")){
-                    response.sendRedirect("Body.html");
+                    request.getRequestDispatcher("Body.html").forward(request, response);
                 }
                 else {
                     //List<Expense> expenses = businessLogic.retrieveExpenses();
                     //session.setAttribute("expenses", expenses);
-                    response.sendRedirect("Body.html");
+                    request.getRequestDispatcher("Body.html").forward(request, response);
                 }
             }
         }

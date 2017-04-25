@@ -13,7 +13,11 @@
                 <th>Resolved</th>
                 <th>Type</th>
                 <th>Status</th>
+                <!--IF MANAGER, INCLUDE ACTIONS-->
+                <#if user.userRoleType = "manager">
                 <th>Action</th>
+                </#if>
+                <!--^^^^^^^^^^^^^^^^^^^^^^^^^^^-->
             </tr>
             </thead>
             <tbody>
@@ -25,6 +29,8 @@
                     <td>${expenses.resolved!""}</td>
                     <td>${expenses.type!""}</td>
                     <td>${expenses.status!""}</td>
+                    <!--IF MANAGER, INCLUDE OPTIONS-->
+                    <#if user.userRoleType = "manager">
                     <td>
                         <div class="form-group div40">
                             <!--<label for="SubmitType"></label> -->
@@ -35,6 +41,8 @@
                             </select>
                         </div>
                     </td>
+                    </#if>
+                    <!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^-->
                 </tr>
             </#list>
             </tbody>
