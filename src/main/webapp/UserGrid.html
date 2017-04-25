@@ -1,13 +1,41 @@
 <div>
-    <h1 class="text-center text-capitalize">Profile<small>small text</small></h1>
-    <div class="container-fluid">
-        <#if employees??>
-            <#list employees as profile>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6">${profile.firstName}</div>
-                    <div class="col-xs-12 col-sm-6">${profile.userRoleType}</div>
-                </div>
-            </#list>
-            <#/if>
+    <h3>Profile</h3>
+    You may view or edit your profile information here. <br><br>
+
+    <form action="/Profile" method="post" style="margin-left: 0px" class="form-inline">
+        First Name: <input type="text" step="0.01" name="firstNameForm" placeholder=${firstName}>
+        Last Name: <input type="text" name="lastNameForm" placeholder=${lastName}>
+        Email: <input type="text" name="emailForm" placeholder=${email}>
+        <button type="submit" style="margin-top: 5px">Update</button>
+    </form>
+    <br>
+
+    <div class="container" style="margin-left: 0px">
+        <p>Your current information:</p>
+
+        <table class="table table-bordered" align="left">
+            <thead>
+            <tr>
+                <th>User ID</th>
+                <th>User Name</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Manager ID</th>
+                <th>Role</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>${userID}</td>
+                <td>${userName}</td>
+                <td>${firstName}</td>
+                <td>${lastName}</td>
+                <td>${email}</td>
+                <td>${manager}</td>
+                <td>${userRoleType}</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>

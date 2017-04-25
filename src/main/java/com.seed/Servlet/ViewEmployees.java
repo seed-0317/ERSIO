@@ -24,6 +24,6 @@ public class ViewEmployees extends HttpServlet {
 
         session.setAttribute("employees",employees);
 
-        request.getRequestDispatcher("ViewEmployees.html").forward(request, response);
+        request.getRequestDispatcher("UserGrid.html").forward(request, response);
     }
 }
