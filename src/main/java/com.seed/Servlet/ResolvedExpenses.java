@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(value="/ResolvedExpenses")
-public class ViewHistoricExpenses extends HttpServlet {
+public class ResolvedExpenses extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
