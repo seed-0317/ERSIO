@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(value="/AllExpenses")
+@WebServlet(value="/ResolvedExpenses")
 public class ViewHistoricExpenses extends HttpServlet {
 
     @Override
@@ -27,6 +27,7 @@ public class ViewHistoricExpenses extends HttpServlet {
         }
         else{
             expenses = businessLogic.retrieveExpensesByManager(userID);
+            System.out.println(expenses);
         }
 
         session.setAttribute("expenses", expenses);
