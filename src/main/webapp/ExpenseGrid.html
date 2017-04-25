@@ -23,7 +23,7 @@
             <tbody>
             <#list expenses as expenses>
                 <tr>
-                    <td>${expenses.amount!""}</td>
+                    <td>${expenses.amount?string.currency!""}</td>
                     <td>${expenses.descriptor!""}</td>
                     <td>${expenses.submitted!""}</td>
                     <td>${expenses.resolved!""}</td>
