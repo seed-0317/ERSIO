@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,27 +17,23 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-    <style>
-        .center {
-            margin: auto;
-            width: 35%;
-            border: 3px solid black;
-            vertical-align: middle;
-        }
-    </style>
 </head>
 <body>
 
-
-<div id="container" class="center" style="background-color: cornflowerblue" style="align-content: center">
-    <h3 style="margin-left: 10px">Enter UserName below to login:</h3>
-
-    <form action="/Login" method="post" style="margin-left: 10px">
-        UserName: <input type="text" name="userNameForm"><br>
-        <button type="submit" style="margin-top: 5px">Submit</button>
-    </form>
-    <br>
-</div>
+<form action="/Login" method="post">
+    <div class="parent" style="padding: 250px 50px;">
+        <div class="imgcontainer" style="align-content: center" >
+            <img HEIGHT="150" WIDTH="150" src="Login_orange.png" alt="Avatar" class="avatar" style="display:block; margin:auto;">
+        </div>
+        <br>
+        <br>
+        <div class="container" style="align-content: center; text-align: center;">
+            <label><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="userNameForm" required>
+            <button type="submit">Login</button>
+        </div>
+    </div>
+</form>
 
 </body>
 </html>
