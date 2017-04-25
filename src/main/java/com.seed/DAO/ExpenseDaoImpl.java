@@ -93,8 +93,7 @@ public class ExpenseDaoImpl implements ExpenseDao {
                             "LEFT JOIN ERSIO.ERS_REIMBURSEMENT_TYPE B " +
                             "ON A.RT_TYPE=B.RT_ID " +
                             "LEFT JOIN ERSIO.ERS_REIMBURSEMENT_STATUS C " +
-                            "ON A.RT_STATUS=C.RS_ID " +
-                            "WHERE RT_STATUS <> 3");
+                            "ON A.RT_STATUS=C.RS_ID");
 
             ResultSet resultset = statement.executeQuery();
             return createListFromResultSet(resultset);
@@ -126,7 +125,28 @@ public class ExpenseDaoImpl implements ExpenseDao {
         return null;
     }
 
-    public void resolveExpense(String R_ID, String RS_STATUS){
+    public List<Expense> retrieveResolvedExpenses() {
+        try(Connection connection = ConnectionFactory.createConnection();){
+
+            PreparedStatement statement = connection.prepareStatement(
+                    "SELECT R_ID, R_AMOUNT, R_DESCRIPTION, R_SUBMITTED, R_RESOLVED, U_ID_AUTHOR, U_ID_RESOLVER, B.RT_TYPE, C.RS_STATUS AS RT_STATUS " +
+                            "FROM ERSIO.ERS_REIMBURSEMENTS A " +
+                            "LEFT JOIN ERSIO.ERS_REIMBURSEMENT_TYPE B " +
+                            "ON A.RT_TYPE=B.RT_ID " +
+                            "LEFT JOIN ERSIO.ERS_REIMBURSEMENT_STATUS C " +
+                            "ON A.RT_STATUS=C.RS_ID " +
+                            "WHERE RT_STATUS <> 3");
+
+            ResultSet resultset = statement.executeQuery();
+            return createListFromResultSet(resultset);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void resolveExpense(int R_ID, String RS_STATUS){
         try(Connection connection = ConnectionFactory.createConnection();){
 
             PreparedStatement statement = connection.prepareStatement("update ERSIO.ERS_REIMBURSEMENTS A " +
@@ -134,10 +154,11 @@ public class ExpenseDaoImpl implements ExpenseDao {
                     "R_RESOLVED=?" +
                     "WHERE R_ID=?");
 
+
             statement.setString(1, RS_STATUS);
             //statement.setString(2, managerUserName);
             statement.setString(2, currentDate());
-            statement.setString(3, R_ID);
+            statement.setInt(3, R_ID);
 
             statement.executeUpdate();
 
