@@ -31,22 +31,18 @@ public class BusinessLogic {
         return user;
         }
     }
-    public void resolveReimbursement(String RS_ID, String RS_STATUS){
-        //update ERSIO.ERS_REIMBURSEMENT_STATUS based on the parameters in the method signature
+    public void resolveReimbursement(int RS_ID, String RS_STATUS){
         ExpenseDao dao = new ExpenseDaoImpl();
+        //change to send int directly
+        //will make sql query easier
         dao.resolveExpense(RS_ID, RS_STATUS);
     }
 
     public void createUser(User newUser){
-        //update ERSIO.ERS_USERS with the updated information
-        //update user which matches updatedUser.getUserName()
         UserDao dao = new UserDaoImpl();
         dao.createUser(newUser);
     }
     public void updateUser(User updatedUser){
-        //update ERSIO.ERS_USERS with the updated information
-        //update user which matches updatedUser.getUserName()
-
         UserDao dao = new UserDaoImpl();
         dao.updateUser(updatedUser);
     }
@@ -89,28 +85,14 @@ public class BusinessLogic {
         while(iter.hasNext()) {
             expense = iter.next();
             if (expense.getIdAuthor()!=IdAuthor) {
-                list.remove(expense);
+                iter.remove(expense);
             }
         }
         return list;
     }
 
-    public List<Expense> retrievePendingExpensesByAuthor(int IdAuthor){
-        List<Expense> list = retrievePendingExpenses();
-        Iterator<Expense> iter = list.listIterator();
-
-        Expense expense;
-        while(iter.hasNext()) {
-            expense = iter.next();
-            if (expense.getIdAuthor()!=IdAuthor) {
-                list.remove(expense);
-            }
-        }
-        return list;
-    }
-
-    public List<Expense> retrieveExpensesByManager(int managerID){
-        List<Expense> list = retrieveExpenses();
+    public List<Expense> retrieveResolvedExpensesByManager(int managerID){
+        List<Expense> list = retrieveResolvedExpenses();
         Iterator<Expense> iter = list.listIterator();
 
         Expense expense;

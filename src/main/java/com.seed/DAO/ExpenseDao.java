@@ -8,8 +8,10 @@ public interface ExpenseDao {
 
     void createExpense(Expense newExpense);
     List<Expense> retrieveExpenses();
-    void resolveExpense(String RS_ID, String RS_STATUS);
+    void resolveExpense(int RS_ID, String RS_STATUS);
     Map<String, Integer> retrieveExpenseTypes();
     Map<String, Integer> retrieveExpenseStatus();
+    List<Expense> retrieveResolvedExpenses();
     List<Expense> retrievePendingExpenses();
+    List<Expense> retrieveExpenses();
 }
