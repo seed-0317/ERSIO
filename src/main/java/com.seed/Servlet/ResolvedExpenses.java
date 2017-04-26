@@ -23,7 +23,7 @@ public class ResolvedExpenses extends HttpServlet {
 
         List<Expense> expenses;
         if (userRoleType.equals("employee")){
-            expenses = businessLogic.retrieveExpensesByAuthor(userID);
+            expenses = businessLogic.retrieveResolvedExpensesByAuthor(userID);
         }
         else{
             expenses = businessLogic.retrieveResolvedExpensesByManager(userID);

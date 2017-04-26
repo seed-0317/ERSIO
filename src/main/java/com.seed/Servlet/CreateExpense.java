@@ -50,6 +50,6 @@ public class CreateExpense extends HttpServlet {
 
         businessLogic.createExpense(newExpense);
 
-        response.sendRedirect("Home.html");
+        request.getRequestDispatcher("ExpenseForm.html").forward(request, response);
     }
 }

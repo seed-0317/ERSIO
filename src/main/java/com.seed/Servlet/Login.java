@@ -46,6 +46,7 @@ public class Login extends HttpServlet {
                 session.setAttribute("manager", user.getManager());
                 session.setAttribute("userRoleType", user.getUserRoleType());
 
+
                 //Send user to either employee home or manager home depending on UR_ROLE in ERSIO.ERS_USER_ROLES
                 if (user.getUserRoleType().equals("employee")){
                     request.getRequestDispatcher("Body.html").forward(request, response);

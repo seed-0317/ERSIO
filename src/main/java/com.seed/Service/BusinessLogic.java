@@ -95,6 +95,38 @@ public class BusinessLogic {
         return list;
     }
 
+
+    public List<Expense> retrievePendingExpensesByAuthor(int IdAuthor){
+        List<Expense> list = retrievePendingExpenses();
+        Iterator<Expense> iter = list.listIterator();
+
+        Expense expense;
+        while(iter.hasNext()) {
+            expense = iter.next();
+            if (expense.getIdAuthor()!=IdAuthor) {
+                iter.remove();
+            }
+        }
+        return list;
+    }
+
+
+
+    public List<Expense> retrieveResolvedExpensesByAuthor(int IdAuthor){
+        List<Expense> list = retrieveResolvedExpenses();
+        Iterator<Expense> iter = list.listIterator();
+
+        Expense expense;
+        while(iter.hasNext()) {
+            expense = iter.next();
+            if (expense.getIdAuthor()!=IdAuthor) {
+                iter.remove();
+            }
+        }
+        return list;
+    }
+
+
     public List<Expense> retrieveResolvedExpensesByManager(int managerID){
         List<Expense> list = retrieveResolvedExpenses();
         Iterator<Expense> iter = list.listIterator();

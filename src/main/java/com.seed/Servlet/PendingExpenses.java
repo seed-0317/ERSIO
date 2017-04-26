@@ -27,7 +27,7 @@ public class PendingExpenses extends HttpServlet {
 
         List<Expense> expenses;
         if (userRoleType.equals("employee")){
-            expenses = businessLogic.retrieveExpensesByAuthor(userID);
+            expenses = businessLogic.retrievePendingExpensesByAuthor(userID);
         }
         else{
             expenses = businessLogic.retrievePendingExpensesByManager(userID);
@@ -64,7 +64,7 @@ public class PendingExpenses extends HttpServlet {
             businessLogic.resolveReimbursement(RS_ID, RS_STATUS);
         }
 
-        request.getRequestDispatcher("Body.html").forward(request, response);
+        request.getRequestDispatcher("ExpenseGrid.html").forward(request, response);
 
 
     }

@@ -16,7 +16,7 @@
                         <th>Status</th>
                         <!--IF MANAGER, INCLUDE ACTIONS-->
                         <#if user.userRoleType = "manager">
-                        <th>Action</th>
+                        <th class="ResolvedExpenses">Action</th>
                         </#if>
                         <!--^^^^^^^^^^^^^^^^^^^^^^^^^^^-->
                     </tr>
@@ -32,7 +32,7 @@
                             <td>${expenses.status!""}</td>
                             <!--IF MANAGER, INCLUDE OPTIONS-->
                             <#if user.userRoleType = "manager">
-                            <td>
+                            <td class="ResolvedExpenses">
                                 <div class="form-group div40" >
                                     <!--<label for="SubmitType"></label> -->
                                     <select typeof="text" name=${expenses.r_id!}>
@@ -56,7 +56,7 @@
                 </tbody>
             </table>
 
-            <button type="submit">Submit</button>
+            <button class="ResolvedExpenses PendingExpenses" type="submit">Submit</button>
 
         </div>
 
