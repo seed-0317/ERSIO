@@ -3,51 +3,62 @@
     <h3>${user.firstName!Employee}'s Expenses</h3>
     You may view your recent expenses below: <br><br>
 
-    <div class="container" style="margin-left: 0px">
-        <table class="table table-bordered" align="left">
-            <thead>
-            <tr>
-                <th>Amount</th>
-                <th>Description</th>
-                <th>Submitted</th>
-                <th>Resolved</th>
-                <th>Type</th>
-                <th>Status</th>
-                <!--IF MANAGER, INCLUDE ACTIONS-->
-                <#if user.userRoleType = "manager">
-                <th>Action</th>
-                </#if>
-                <!--^^^^^^^^^^^^^^^^^^^^^^^^^^^-->
-            </tr>
-            </thead>
-            <tbody>
-            <#list expenses as expenses>
-                <tr>
-                    <td>${expenses.amount?string.currency!""}</td>
-                    <td>${expenses.descriptor!""}</td>
-                    <td>${expenses.submitted!""}</td>
-                    <td>${expenses.resolved!""}</td>
-                    <td>${expenses.type!""}</td>
-                    <td>${expenses.status!""}</td>
-                    <!--IF MANAGER, INCLUDE OPTIONS-->
-                    <#if user.userRoleType = "manager">
-                    <td>
-                        <div class="form-group div40">
-                            <!--<label for="SubmitType"></label> -->
-                            <select typeof="text">
-                                <option>Pending</option>
-                                <option>Approve</option>
-                                <option>Deny</option>
-                            </select>
-                        </div>
+    <form action="/PendingExpenses" method="post">
+        <div class="container" style="margin-left: 0px">
+            <table class="table table-bordered" align="left">
+                <thead>
+                    <tr>
+                        <th>Amount</th>
+                        <th>Description</th>
+                        <th>Submitted</th>
+                        <th>Resolved</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <!--IF MANAGER, INCLUDE ACTIONS-->
+                        <#if user.userRoleType = "manager">
+                        <th>Action</th>
+                        </#if>
+                        <!--^^^^^^^^^^^^^^^^^^^^^^^^^^^-->
+                    </tr>
+                </thead>
+                <tbody>
+                    <#list expenses as expenses>
+                        <tr>
+                            <td>${expenses.amount?string.currency!""}</td>
+                            <td>${expenses.descriptor!""}</td>
+                            <td>${expenses.submitted!""}</td>
+                            <td>${expenses.resolved!""}</td>
+                            <td>${expenses.type!""}</td>
+                            <td>${expenses.status!""}</td>
+                            <!--IF MANAGER, INCLUDE OPTIONS-->
+                            <#if user.userRoleType = "manager">
+                            <td>
+                                <div class="form-group div40" >
+                                    <!--<label for="SubmitType"></label> -->
+                                    <select typeof="text" name=${expenses.r_id!}>
+                                        <option value="Pending" >Pending</option>
+                                        <option value="Approved">Approve</option>
+                                        <option value="Declined">Deny</option>
 
-                    </td>
-                    </#if>
-                    <!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^-->
-                </tr>
-            </#list>
-            </tbody>
-        </table>
-    </div>
+                                        <!--<option value=“3”>Pending</option>-->
+                                        <!--<option value=“1”>Approve</option>-->
+                                        <!--<option value="2">Deny</option>-->
+                                    </select>
+                                </div>
+
+                            </td>
+                            </#if>
+                            <!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^-->
+                        </tr>
+                    </#list>
+
+                </tbody>
+            </table>
+
+            <button type="submit">Submit</button>
+
+        </div>
+
+    </form>
 
 </div>

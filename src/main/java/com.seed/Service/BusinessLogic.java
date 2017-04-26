@@ -16,6 +16,8 @@ public class BusinessLogic {
     public BusinessLogic() {
     }
 
+
+
     /**
      * @param userName
      * @return person object if logged in successfully, otherwise {@code null}
@@ -31,7 +33,7 @@ public class BusinessLogic {
         return user;
         }
     }
-    public void resolveReimbursement(String RS_ID, String RS_STATUS){
+    public void resolveReimbursement(int RS_ID, int RS_STATUS){
         //update ERSIO.ERS_REIMBURSEMENT_STATUS based on the parameters in the method signature
         ExpenseDao dao = new ExpenseDaoImpl();
         dao.resolveExpense(RS_ID, RS_STATUS);

@@ -126,7 +126,7 @@ public class ExpenseDaoImpl implements ExpenseDao {
         return null;
     }
 
-    public void resolveExpense(String R_ID, String RS_STATUS){
+    public void resolveExpense(int R_ID, int RS_STATUS){
         try(Connection connection = ConnectionFactory.createConnection();){
 
             PreparedStatement statement = connection.prepareStatement("update ERSIO.ERS_REIMBURSEMENTS A " +
@@ -134,10 +134,10 @@ public class ExpenseDaoImpl implements ExpenseDao {
                     "R_RESOLVED=?" +
                     "WHERE R_ID=?");
 
-            statement.setString(1, RS_STATUS);
+            statement.setInt(1, RS_STATUS);
             //statement.setString(2, managerUserName);
             statement.setString(2, currentDate());
-            statement.setString(3, R_ID);
+            statement.setInt(3, R_ID);
 
             statement.executeUpdate();
 
