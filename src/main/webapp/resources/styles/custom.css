@@ -315,4 +315,6 @@ html { height: 100%;}
 
 .background {
 	background-color:whitesmoke;
+	padding: 20px;
+	border-radius: 25px;
 }
