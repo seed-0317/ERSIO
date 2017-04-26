@@ -26,14 +26,15 @@ $(function(){
         event.preventDefault();
 
         if (this.parentElement.id==="formPost"){
-            var link=this.value.replace(' ', '');
-
+            var link=this.value.replace(' ', ''),
+                method = "post";
         } else {
-            var link= this.innerText.replace(' ','');
+            var link= this.innerText.replace(' ',''),
+                method = "get";
         }
         if(link !== "Logout"){
             $.ajax({
-                method   : "get",
+                method   : method,
                 url      : "/" + link,
                 success  : function(html){
                     $("#main").empty().append(html);
