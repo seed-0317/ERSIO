@@ -43,7 +43,13 @@ public class PendingExpenses extends HttpServlet {
 
         Map<String, String[]> myMap = request.getParameterMap();
 
-        Map<String, Integer> statusLookup= businessLogic.retrieveExpenseTypes();
+        Map<String, Integer> statusLookup= businessLogic.retrieveExpenseStatus();
+
+        for (String key : statusLookup.keySet()) {
+
+            System.out.println("key: " + key + " value: " + statusLookup.get(key));
+        }
+
 
 
         for (String key : myMap.keySet()) {
@@ -52,7 +58,7 @@ public class PendingExpenses extends HttpServlet {
             System.out.println(RS_ID);
             String status = myMap.get(key)[0];
             System.out.println(status);
-            Integer RS_STATUS=(statusLookup.get(status));
+            int RS_STATUS=statusLookup.get(status);
             System.out.println(RS_STATUS);
 
             businessLogic.resolveReimbursement(RS_ID, RS_STATUS);
