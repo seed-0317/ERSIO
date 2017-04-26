@@ -32,10 +32,14 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Expenses <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li class="dropdown-header"></li>
+                    <!--*****IF MANAGER, INCLUDE PENDING/RESOLVED EXPENSE NAVBAR BUTTON-->
+                    <#if user.userRoleType = "manager">
                     <li class = "servletLink"><a href="#">Pending Expenses</a></li>
                     <li class = "servletLink"><a href="#">Resolved Expenses</a></li>
-                    <!--*****IF EMPLOYEE, INCLUDE CREATE EXPENSE NAVBAR BUTTON-->
+                    </#if>
+                    <!--*****IF EMPLOYEE, INCLUDE VIEW/CREATE EXPENSE NAVBAR BUTTON-->
                     <#if user.userRoleType = "employee">
+                        <li class = "servletLink"><a href="#">View Expenses</a></li>
                     <li class = "servletLink"><a href="#">Create Expense</a></li>
                     </#if>
                     <li class="dropdown-header"></li>
