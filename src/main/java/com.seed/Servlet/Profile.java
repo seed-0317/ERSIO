@@ -26,7 +26,6 @@ public class Profile extends HttpServlet {
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        User oldUser=user;
 
         if (!firstName.equals("") && !firstName.equals(session.getAttribute("firstName"))){
             session.setAttribute("firstName", firstName);
@@ -42,10 +41,8 @@ public class Profile extends HttpServlet {
         }
 
         BusinessLogic businessLogic = new BusinessLogic();
+        businessLogic.updateUser(user);
 
-        if (!user.equals(oldUser)){
-            businessLogic.updateUser(user);
-        }
         request.getRequestDispatcher("Home.html").forward(request, response);
     }
 }
