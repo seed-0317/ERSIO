@@ -21,21 +21,37 @@
 // When user clicks the navigation bar button, return call the servlet with the name that is the same as the button.
 // On success, replace the HTML #main content with the html data in the HTTP response
 $(function(){
-    $('.servletLink').click(function(){
-        var link = this.innerText.replace(' ','');
+
+    var x = function(event){
+        event.preventDefault();
+
+        if (this.parentElement.id==="formPost"){
+            var link=this.value.replace(' ', '');
+
+        } else {
+            var link= this.innerText.replace(' ','');
+        }
         if(link !== "Logout"){
             $.ajax({
                 method   : "get",
                 url      : "/" + link,
                 success  : function(html){
                     $("#main").empty().append(html);
+                    $('.servletLink').click(x);
+                    $('.tablescroll').DataTable( {
+                        scrollY:        '49vh',
+                        scrollCollapse: true,
+                        paging:         false
+                    } );
                     $('.'+link).remove();
-                    },
+                },
                 error    : function(){},
                 complete : function(){}
             });
         };
-    });
+    };
+
+    $('.servletLink').click(x);
 });
 
 
@@ -76,4 +92,6 @@ $(document).ready(function () {
         trigger.toggleClass('is-open is-closed');
         $('#wrapper').toggleClass('toggled');
     });
+
 });
+

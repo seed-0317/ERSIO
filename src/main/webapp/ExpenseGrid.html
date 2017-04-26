@@ -1,11 +1,11 @@
-<div>
+<div class="background"  style="background-color:whitesmoke; padding: 30px;">
 
     <h3>${user.firstName!Employee}'s Expenses</h3>
     You may view your recent expenses below: <br><br>
 
     <form action="/PendingExpenses" method="post">
-        <div class="container" style="margin-left: 0px">
-            <table class="table table-bordered" align="left">
+        <div id="formPost" class="container" style="margin-left: 0px">
+            <table class="table table-bordered tablescroll"  align="left">
                 <thead>
                     <tr>
                         <th>Amount</th>
@@ -41,9 +41,6 @@
                                         <option value="Approved">Approve</option>
                                         <option value="Declined">Deny</option>
 
-                                        <!--<option value=“3”>Pending</option>-->
-                                        <!--<option value=“1”>Approve</option>-->
-                                        <!--<option value="2">Deny</option>-->
                                     </select>
                                 </div>
 
@@ -56,7 +53,7 @@
                 </tbody>
             </table>
 
-            <button class="ResolvedExpenses PendingExpenses" type="submit">Submit</button>
+            <button class="ResolvedExpenses servletLink" type="submit" value="PendingExpenses">Submit</button>
 
         </div>
 

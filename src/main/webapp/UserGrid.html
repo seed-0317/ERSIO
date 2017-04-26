@@ -1,31 +1,34 @@
-<h3>${user.firstName!Employee}'s Employees</h3>
-You may view current employees below: <br><br>
+<div style="background-color:whitesmoke;">
+    <h3>${user.firstName!Employee}'s Employees</h3>
+    You may view current employees below:
+    <br><br>
 
-<div class="container" style="margin-left: 0px">
-    <table class="table table-bordered" align="left">
-        <thead>
-        <tr>
-            <th>User ID</th>
-            <th>User Name</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Manager ID</th>
-            <th>Role Type</th>
-        </tr>
-        </thead>
-        <tbody>
-        <#list employees as employees>
-            <tr>
-                <td>${employees.userID!""}</td>
-                <td>${employees.userName!""}</td>
-                <td>${employees.firstName!""}</td>
-                <td>${employees.lastName!""}</td>
-                <td>${employees.email!""}</td>
-                <td>${employees.manager!""}</td>
-                <td>${employees.userRoleType!""}</td>
-            </tr>
-        </#list>
-        </tbody>
-    </table>
+    <div class="container" style="margin-left: 0px">
+        <table class="table table-bordered" align="left">
+            <thead>
+                <tr>
+                <th>User ID</th>
+                <th>User Name</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Manager ID</th>
+                <th>Role Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <#list employees as employees>
+                    <tr>
+                        <td>${employees.userID!""}</td>
+                        <td>${employees.userName!""}</td>
+                        <td>${employees.firstName!""}</td>
+                        <td>${employees.lastName!""}</td>
+                        <td>${employees.email!""}</td>
+                        <td>${employees.manager!""}</td>
+                        <td>${employees.userRoleType!""}</td>
+                    </tr>
+                </#list>
+            </tbody>
+        </table>
+    </div>
 </div>
