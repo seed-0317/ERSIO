@@ -11,5 +11,7 @@ public interface ExpenseDao {
     void resolveExpense(int RS_ID, int RS_STATUS);
     Map<String, Integer> retrieveExpenseTypes();
     Map<String, Integer> retrieveExpenseStatus();
+    List<Expense> retrieveResolvedExpenses();
     List<Expense> retrievePendingExpenses();
+
 }
