@@ -31,7 +31,7 @@ public class BusinessLogic {
             return user;
         }
     }
-    public void resolveReimbursement(int RS_ID, String RS_STATUS){
+    public void resolveReimbursement(int RS_ID, int RS_STATUS){
         ExpenseDao dao = new ExpenseDaoImpl();
         //change to send int directly
         //will make sql query easier
@@ -61,6 +61,10 @@ public class BusinessLogic {
         ExpenseDao dao = new ExpenseDaoImpl();
         return dao.retrievePendingExpenses();
     }
+    public List<Expense> retrieveResolvedExpenses(){
+        ExpenseDao dao = new ExpenseDaoImpl();
+        return dao.retrieveResolvedExpenses();
+    }
 
     public Map<String,Integer> retrieveExpenseTypes(){
         ExpenseDao dao = new ExpenseDaoImpl();
@@ -85,7 +89,7 @@ public class BusinessLogic {
         while(iter.hasNext()) {
             expense = iter.next();
             if (expense.getIdAuthor()!=IdAuthor) {
-                iter.remove(expense);
+                iter.remove();
             }
         }
         return list;

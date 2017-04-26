@@ -27,7 +27,7 @@ public class PendingExpenses extends HttpServlet {
 
         List<Expense> expenses;
         if (userRoleType.equals("employee")){
-            expenses = businessLogic.retrievePendingExpensesByAuthor(userID);
+            expenses = businessLogic.retrieveExpensesByAuthor(userID);
         }
         else{
             expenses = businessLogic.retrievePendingExpensesByManager(userID);
@@ -39,25 +39,21 @@ public class PendingExpenses extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        BusinessLogic businessLogic = new BusinessLogic();
 
         Map<String, String[]> myMap = request.getParameterMap();
-
-
-
-
-
-        BusinessLogic businessLogic = new BusinessLogic();
 
         Map<String, Integer> statusLookup= businessLogic.retrieveExpenseTypes();
 
 
         for (String key : myMap.keySet()) {
-            System.out.print("oh my god why???");
+            System.out.println(key);
             int RS_ID = Integer.parseInt(key);
+            System.out.println(RS_ID);
             String status = myMap.get(key)[0];
-            int RS_STATUS=statusLookup.get(status);
-
-
+            System.out.println(status);
+            Integer RS_STATUS=(statusLookup.get(status));
+            System.out.println(RS_STATUS);
 
             businessLogic.resolveReimbursement(RS_ID, RS_STATUS);
         }

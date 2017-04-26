@@ -26,7 +26,7 @@ public class ResolvedExpenses extends HttpServlet {
             expenses = businessLogic.retrieveExpensesByAuthor(userID);
         }
         else{
-            expenses = businessLogic.retrieveExpensesByManager(userID);
+            expenses = businessLogic.retrieveResolvedExpensesByManager(userID);
             System.out.println(expenses);
         }
 
