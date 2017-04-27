@@ -18,10 +18,15 @@ public class Profile extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         BusinessLogic businessLogic = new BusinessLogic();
         HttpSession session = request.getSession();
+
         int managerID = (int)session.getAttribute("manager");
-        User manager = businessLogic.login(managerID);
-        String managerName=manager.getFirstName()+" "+manager.getLastName();
-        session.setAttribute("managerName", managerName);
+        
+        if (managerID>0){
+            User manager = businessLogic.login(managerID);
+            String managerName=manager.getFirstName()+" "+manager.getLastName();
+            session.setAttribute("managerName", managerName);
+        }
+        session.setAttribute("managerName", "");
 
         request.getRequestDispatcher("Profile.html").forward(request, response);
     }
