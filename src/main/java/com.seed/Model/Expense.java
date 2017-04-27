@@ -26,8 +26,8 @@ public class Expense {
         this.resolver = resolver;
         this.type = type;
         this.status = status;
-        this.status = firstName;
-        this.status = lastName;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public Expense(int r_id, double amount, String descriptor, String submitted, String resolved, int idAuthor, int resolver, String type, String status, String firstName, String lastName) {
@@ -41,8 +41,8 @@ public class Expense {
         this.resolver = resolver;
         this.type = type;
         this.status = status;
-        this.status = firstName;
-        this.status = lastName;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public double getAmount() {
