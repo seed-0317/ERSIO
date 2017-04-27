@@ -32,7 +32,7 @@ public class BusinessLogic {
         }
     }
     public User login(int userID) {
-        if (userID != 0) {
+        if (userID == 0) {
             return null;
         }
         else {
