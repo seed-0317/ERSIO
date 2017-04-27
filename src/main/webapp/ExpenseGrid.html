@@ -35,9 +35,9 @@
                             <!--IF MANAGER, INCLUDE OPTIONS-->
                             <#if user.userRoleType = "manager">
                             <td class="ResolvedExpenses">
-                                <div class="form-group div40" >
+                                <div class="form-group div40">
                                     <!--<label for="SubmitType"></label> -->
-                                    <select typeof="text" name=${expenses.r_id!}>
+                                    <select class = "form-data" typeof="text" name=${expenses.r_id!}>
 
                                         <option value="Pending" >Pending</option>
                                         <option value="Approved">Approve</option>
@@ -54,9 +54,9 @@
 
                 </tbody>
             </table>
-
-            <button class="ResolvedExpenses servletLink" type="submit" value="PendingExpenses">Submit</button>
-
+            <#if user.userRoleType = "manager">
+            <button class="ResolvedExpenses servletLink"  data-url="CreateExpense" data-method="Post" type="submit">Submit</button>
+            </#if>
         </div>
 
     </form>

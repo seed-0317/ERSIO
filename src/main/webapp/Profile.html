@@ -3,10 +3,10 @@
 You may view or edit your profile information here. <br><br>
 
 <form id="formPost" action="/Profile" method="post" style="margin-left: 0px" class="form-inline">
-    First Name: <input type="text" step="0.01" name="firstNameForm" placeholder=${firstName}>
-    Last Name: <input type="text" name="lastNameForm" placeholder=${lastName}>
-    Email: <input type="text" name="emailForm" placeholder=${email}>
-    <button type="submit" class="servletLink" value="Profile" style="margin-top: 5px">Update</button>
+    First Name: <input class = "form-data" type="text" step="0.01" name="firstNameForm" placeholder=${firstName}>
+    Last Name: <input class = "form-data" type="text" name="lastNameForm" placeholder=${lastName}>
+    Email: <input class = "form-data" type="text" name="emailForm" placeholder=${email}>
+    <button type="submit" class="servletLink"  data-url="Profile" data-method="Post" style="margin-top: 5px">Update</button>
 </form>
 <br>
 

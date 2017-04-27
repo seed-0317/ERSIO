@@ -28,7 +28,7 @@ public class CreateExpense extends HttpServlet {
         List<String> list = new ArrayList(set);
         session.setAttribute("expenseTypes",list);
 
-        response.sendRedirect("ExpenseForm.html");
+        request.getRequestDispatcher("ExpenseForm.html").forward(request, response);
     }
 
     @Override
