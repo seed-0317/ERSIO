@@ -8,8 +8,8 @@ public interface UserDao {
 
     void createUser(User newUser);
     List<User> retrieveUsers(int managerID);
-    User retrieveUser(String userID);
+    User retrieveUser(String userName);
+    User retrieveUser(int  userID);
     void updateUser(User updatedUser);
-    Map<Integer, Integer> retrieveEmployeeMap();
-
+    Map <Integer, Integer> retrieveEmployeeMap();
 }

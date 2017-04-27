@@ -1,6 +1,7 @@
 package com.seed.Servlet;
 
 import java.io.IOException;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +16,12 @@ public class Profile extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        BusinessLogic businessLogic = new BusinessLogic();
+        HttpSession session = request.getSession();
+        int managerID = (int)session.getAttribute("manager");
+        User manager = businessLogic.login(managerID);
+        session.setAttribute("managerName", manager.getFirstName()+" "+manager.getLastName());
+
         request.getRequestDispatcher("Profile.html").forward(request, response);
     }
 

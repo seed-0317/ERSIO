@@ -2,8 +2,6 @@ package com.seed.Servlet;
 
 import com.seed.Model.Expense;
 import com.seed.Service.BusinessLogic;
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

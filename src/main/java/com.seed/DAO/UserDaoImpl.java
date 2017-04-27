@@ -103,6 +103,43 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public User retrieveUser(int userID) {
+        try (Connection connection = ConnectionFactory.createConnection();) {
+
+            PreparedStatement statement = connection.prepareStatement("select U_ID, U_USERNAME, U_FIRSTNAME, U_LASTNAME, U_EMAIL, U_MANAGER, B.UR_ROLE " +
+                    "from ERSIO.ERS_USERS A JOIN ERSIO.ERS_USER_ROLES B ON A.UR_ID = B.UR_ID " +
+                    "WHERE U_ID = ? ");
+
+            //Need to add single quotes around userName
+            statement.setInt(1, userID);
+
+            ResultSet resultset = statement.executeQuery();
+
+            if (resultset == null) {
+                return null;
+            } else {
+                resultset.next();
+                //int userID = resultset.getInt("U_ID");
+                String userName = resultset.getString("U_USERNAME");
+                String firstName = resultset.getString("U_FIRSTNAME");
+                String lastName = resultset.getString("U_LASTNAME");
+                String email = resultset.getString("U_EMAIL");
+                int manager = resultset.getInt("U_MANAGER");
+                String userRoleType = resultset.getString("UR_ROLE");
+
+                User user = new User(userID, userName, firstName, lastName, email, manager, userRoleType);
+
+                return user;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    @Override
     public void updateUser(User updatedUser) {
         try (Connection connection = ConnectionFactory.createConnection();) {
 

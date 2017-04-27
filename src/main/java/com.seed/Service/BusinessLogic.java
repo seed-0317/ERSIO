@@ -23,12 +23,21 @@ public class BusinessLogic {
      */
     public User login(String userName) {
         if (userName == null || userName.isEmpty()) {
-            // Could also: throw new IllegalArgumentException();
             return null;
         }
         else {
             UserDao dao = new UserDaoImpl();
             User user = dao.retrieveUser(userName);
+            return user;
+        }
+    }
+    public User login(int userID) {
+        if (userID != 0) {
+            return null;
+        }
+        else {
+            UserDao dao = new UserDaoImpl();
+            User user = dao.retrieveUser(userID);
             return user;
         }
     }
@@ -150,6 +159,7 @@ public class BusinessLogic {
         }
         return list;
     }
+
     public Map<Integer, Integer> retrieveEmployeeMap(){
         UserDao dao = new UserDaoImpl();
         Map<Integer, Integer> map = dao.retrieveEmployeeMap();
