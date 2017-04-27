@@ -4,9 +4,9 @@
     <br><br>
 
 <form id="formPost" action="/Profile" method="post" style="margin-left: 0px" class="form-inline">
-    First Name: <input type="text" step="0.01" name="firstNameForm" placeholder=${firstName}>
-    Last Name: <input type="text" name="lastNameForm" placeholder=${lastName}>
-    Email: <input type="text" name="emailForm" placeholder=${email}>
+    First Name: <input type="text" step="0.01" name="firstNameForm" placeholder=${firstName} maxlength="20">
+    Last Name: <input type="text" name="lastNameForm" placeholder=${lastName} maxlength="20">
+    Email: <input type="email" name="emailForm" placeholder=${email}>
     <button type="submit" class="servletLink" value="Profile" style="margin-top: 5px">Update</button>
 </form>
 <br>

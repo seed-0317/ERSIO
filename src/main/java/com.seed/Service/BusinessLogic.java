@@ -7,6 +7,7 @@ import com.seed.DAO.UserDaoImpl;
 import com.seed.Model.User;
 import com.seed.Model.Expense;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -153,5 +154,10 @@ public class BusinessLogic {
             }
         }
         return list;
+    }
+    public Map<Integer, Integer> retrieveEmployeeMap(){
+        UserDao dao = new UserDaoImpl();
+        Map<Integer, Integer> map = dao.retrieveEmployeeMap();
+        return map;
     }
 }
