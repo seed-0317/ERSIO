@@ -1,13 +1,14 @@
-<div class="background" style="width:110%;" >
+<div class="background" >
 
     <!--style="background-color:whitesmoke; padding: 20px; border-radius: 25px;"-->
 
     <h3>${user.firstName!Employee}'s Expenses</h3>
-    You may view your recent expenses below: <br><br>
+    <!--You may view your recent expenses below: -->
+    <br><br>
 
     <form action="/PendingExpenses" method="post">
         <div id="formPost" class="container" style="margin-left: 0px">
-            <table class="table table-bordered tablescroll"  align="left">
+            <table class="table table-hover table-bordered tablescroll"  align="left">
                 <thead>
                     <tr>
                         <th>Amount</th>
@@ -25,7 +26,7 @@
                 </thead>
                 <tbody>
                     <#list expenses as expenses>
-                        <tr>
+                        <tr >
                             <td>${expenses.amount?string.currency!""}</td>
                             <td>${expenses.descriptor!""}</td>
                             <td>${expenses.submitted!""}</td>
@@ -57,6 +58,7 @@
             <#if user.userRoleType = "manager">
             <button class="ResolvedExpenses servletLink"  data-url="CreateExpense" data-method="Post" type="submit">Submit</button>
             </#if>
+
         </div>
 
     </form>

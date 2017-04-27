@@ -2,7 +2,8 @@
 
 <div class="background">
     <h3> Welcome ${user.firstName!Employee}</h3>
-    Please enter your expense information below: <br><br>
+    Please enter your expense information below:
+    <br><br>
 
     <form id="formPost" action="/CreateExpense" method="post" style="margin-left: 10px" class="form-inline">
         Amount: <input class = "form-data" type="number" min="0.01" step="0.01" name="amountForm">
@@ -14,6 +15,7 @@
             </#list>
         </select>
 
-        <button type="submit" class="servletLink"  data-url="CreateExpense" data-method="Post"  style="margin-top: 5px">Submit</button>
+        <button type="submit" class="servletLink"  data-url="CreateExpense" data-method="Post"  style="margin: 5px">Submit</button>
+
     </form>
 </div>

@@ -52,7 +52,7 @@ $(function(){
                     debugger;
                     $("#main").empty().append(html);
                     $('.tablescroll').DataTable( {
-                        scrollY:        '49vh',
+                        scrollY:        '45vh',
                         scrollCollapse: true,
                         paging:         false
                     });
@@ -61,6 +61,7 @@ $(function(){
             },
             error    : function(){console.log("error");},
             complete    : function(){debugger;}
+
 
         });
 

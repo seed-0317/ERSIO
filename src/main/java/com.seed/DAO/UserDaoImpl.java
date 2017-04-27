@@ -2,8 +2,10 @@ package com.seed.DAO;
 
 import com.seed.Model.User;
 import java.sql.*;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class UserDaoImpl implements UserDao {
 
@@ -119,5 +121,30 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public Map<Integer, Integer> retrieveEmployeeMap(){
+        try (Connection connection = ConnectionFactory.createConnection();) {
+
+            PreparedStatement statement = connection.prepareStatement("SELECT U_ID, U_MANAGER FROM ERSIO.ERS_USERS GROUP BY 1,2;");
+
+            ResultSet resultset = statement.executeQuery();
+
+            Map<Integer, Integer> map = new HashMap<>();
+
+            if (resultset == null) {
+                return null;
+            } else {
+                while (resultset.next()) {
+                    int userID = resultset.getInt("U_ID");
+                    int manager = resultset.getInt("U_MANAGER");
+                    map.put(userID, manager);
+                }
+                return map;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

@@ -317,4 +317,9 @@ html { height: 100%;}
 	background-color:whitesmoke;
 	padding: 20px;
 	border-radius: 25px;
+	width:110%;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+	background-color: #D4D3D1;
 }
