@@ -20,13 +20,15 @@ public class Profile extends HttpServlet {
         HttpSession session = request.getSession();
 
         int managerID = (int)session.getAttribute("manager");
-        
+
         if (managerID>0){
             User manager = businessLogic.login(managerID);
             String managerName=manager.getFirstName()+" "+manager.getLastName();
             session.setAttribute("managerName", managerName);
         }
-        session.setAttribute("managerName", "");
+        else{
+            session.setAttribute("managerName", "");
+        }
 
         request.getRequestDispatcher("Profile.html").forward(request, response);
     }
