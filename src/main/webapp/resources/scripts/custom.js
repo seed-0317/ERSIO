@@ -40,9 +40,10 @@ $(function(){
                     $("#main").empty().append(html);
                     $('.servletLink').click(x);
                     $('.tablescroll').DataTable( {
-                        scrollY:        '49vh',
+                        scrollY:        '45vh',
                         scrollCollapse: true,
                         paging:         false
+                        // "pagingType": "first_last_numbers"
                     } );
                     $('.'+link).remove();
                 },
