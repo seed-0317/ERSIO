@@ -2,6 +2,7 @@ package com.seed.DAO;
 
 import com.seed.Model.User;
 import java.util.List;
+import java.util.Map;
 
 public interface UserDao {
 
@@ -9,5 +10,6 @@ public interface UserDao {
     List<User> retrieveUsers(int managerID);
     User retrieveUser(String userID);
     void updateUser(User updatedUser);
+    Map<Integer, Integer> retrieveEmployeeMap();
 
 }
