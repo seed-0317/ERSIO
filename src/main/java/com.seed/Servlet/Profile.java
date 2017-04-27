@@ -43,6 +43,6 @@ public class Profile extends HttpServlet {
         BusinessLogic businessLogic = new BusinessLogic();
         businessLogic.updateUser(user);
 
-        request.getRequestDispatcher("Home.html").forward(request, response);
+        request.getRequestDispatcher("Profile.html").forward(request, response);
     }
 }
