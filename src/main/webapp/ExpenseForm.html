@@ -6,16 +6,17 @@
     <br><br>
 
     <form id="formPost" action="/CreateExpense" method="post" style="margin-left: 10px" class="form-inline">
-        Amount: <input type="number" min="0.01" step="0.01" name="amountForm">
-        Description: <input type="text" name="descriptionForm">
-        <select class="select" name="expenseTypeForm">
+        Amount: <input class = "form-data" type="number" min="0.01" step="0.01" name="amountForm">
+        Description: <input class = "form-data" type="text" name="descriptionForm">
+        <select class="select form-data" name="expenseTypeForm">
             <option selected>Select Expense Type</option>
             <#list expenseTypes as expenseType>
                 <option>${expenseType!""}</option>
             </#list>
         </select>
 
-        <button id="myBtn" type="submit" class="servletLink" value="CreateExpense" style="margin: 5px">Submit</button>
+        <button id="buttonId" type="submit" class="servletLink"  data-url="CreateExpense" data-method="Post"  style="margin: 5px">Submit</button>
+
     </form>
 
     <div id="myModal" class="modal">
@@ -34,7 +35,7 @@
         var modal = document.getElementById('myModal');
 
         // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
+        var btn = document.getElementById("buttonId");
 
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
