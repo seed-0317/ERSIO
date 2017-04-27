@@ -13,6 +13,9 @@
                     <tr>
                         <th>Amount</th>
                         <th>Description</th>
+                        <#if user.userRoleType = "manager">
+                        <th>Employee</th>
+                        </#if>
                         <th>Submitted</th>
                         <th>Resolved</th>
                         <th>Type</th>
@@ -29,6 +32,9 @@
                         <tr >
                             <td>${expenses.amount?string.currency!""}</td>
                             <td>${expenses.descriptor!""}</td>
+                            <#if user.userRoleType = "manager">
+                            <td>${expenses.firstName!""} ${expenses.lastName!""}</td>
+                            </#if>
                             <td>${expenses.submitted!""}</td>
                             <td>${expenses.resolved!""}</td>
                             <td>${expenses.type!""}</td>
