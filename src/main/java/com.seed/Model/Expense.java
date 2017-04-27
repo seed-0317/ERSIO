@@ -10,11 +10,13 @@ public class Expense {
     private int resolver;
     private String type;
     private String status;
+    private String firstName;
+    private String lastName;
 
     public Expense() {
     }
 
-    public Expense( double amount, String descriptor, String submitted, String resolved, int idAuthor, int resolver, String type, String status) {
+    public Expense( double amount, String descriptor, String submitted, String resolved, int idAuthor, int resolver, String type, String status, String firstName, String lastName) {
         super();
         this.amount = amount;
         this.descriptor = descriptor;
@@ -24,9 +26,11 @@ public class Expense {
         this.resolver = resolver;
         this.type = type;
         this.status = status;
+        this.status = firstName;
+        this.status = lastName;
     }
 
-    public Expense(int r_id, double amount, String descriptor, String submitted, String resolved, int idAuthor, int resolver, String type, String status) {
+    public Expense(int r_id, double amount, String descriptor, String submitted, String resolved, int idAuthor, int resolver, String type, String status, String firstName, String lastName) {
         super();
         this.r_id=r_id;
         this.amount = amount;
@@ -37,6 +41,8 @@ public class Expense {
         this.resolver = resolver;
         this.type = type;
         this.status = status;
+        this.status = firstName;
+        this.status = lastName;
     }
 
     public double getAmount() {
@@ -69,6 +75,22 @@ public class Expense {
 
     public String getStatus() {
         return status;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName=lastName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName=firstName;
     }
 
     public void setAmount(double amount) {
@@ -107,9 +129,7 @@ public class Expense {
         return r_id;
     }
 
-    public void setR_id(int r_id) {
-        this.r_id = r_id;
-    }
+
 
     @Override
     public boolean equals(Object o) {
