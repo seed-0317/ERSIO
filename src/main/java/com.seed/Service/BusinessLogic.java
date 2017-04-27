@@ -34,8 +34,6 @@ public class BusinessLogic {
     }
     public void resolveReimbursement(int RS_ID, int RS_STATUS){
         ExpenseDao dao = new ExpenseDaoImpl();
-        //change to send int directly
-        //will make sql query easier
         dao.resolveExpense(RS_ID, RS_STATUS);
     }
 
@@ -96,22 +94,19 @@ public class BusinessLogic {
         return list;
     }
 
-
-    public List<Expense> retrievePendingExpensesByAuthor(int IdAuthor){
-        List<Expense> list = retrievePendingExpenses();
-        Iterator<Expense> iter = list.listIterator();
-
-        Expense expense;
-        while(iter.hasNext()) {
-            expense = iter.next();
-            if (expense.getIdAuthor()!=IdAuthor) {
-                iter.remove();
-            }
-        }
-        return list;
-    }
-
-
+//    public List<Expense> retrievePendingExpensesByAuthor(int IdAuthor){
+//        List<Expense> list = retrievePendingExpenses();
+//        Iterator<Expense> iter = list.listIterator();
+//
+//        Expense expense;
+//        while(iter.hasNext()) {
+//            expense = iter.next();
+//            if (expense.getIdAuthor()!=IdAuthor) {
+//                iter.remove();
+//            }
+//        }
+//        return list;
+//    }
 
     public List<Expense> retrieveResolvedExpensesByAuthor(int IdAuthor){
         List<Expense> list = retrieveResolvedExpenses();

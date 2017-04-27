@@ -42,9 +42,11 @@ public class PendingExpenses extends HttpServlet {
         for (String key : myMap.keySet()) {
             int RS_ID = Integer.parseInt(key);
             String status = myMap.get(key)[0];
-            int RS_STATUS=statusLookup.get(status);
+            int RS_STATUS = statusLookup.get(status);
 
-            businessLogic.resolveReimbursement(RS_ID, RS_STATUS);
+            if (RS_STATUS != 3) {
+                businessLogic.resolveReimbursement(RS_ID, RS_STATUS);
+            }
         }
         request.getRequestDispatcher("ExpenseGrid.html").forward(request, response);
     }
