@@ -27,6 +27,7 @@ $(function(){
                 $(document).ready(function(){
                     $('#buttonId').click(ajaxFunction);
                 });
+                if(ajaxMethod.toUpperCase() === "POST"){modal.style.display = "block";};
                 $('.tablescroll').DataTable( {
                     scrollY:        '49vh',
                     scrollCollapse: true,
