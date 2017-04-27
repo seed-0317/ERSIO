@@ -45,17 +45,16 @@ public class Login extends HttpServlet {
                 session.setAttribute("email", user.getEmail());
                 session.setAttribute("manager", user.getManager());
                 session.setAttribute("userRoleType", user.getUserRoleType());
-
-
+                
                 //Send user to either employee home or manager home depending on UR_ROLE in ERSIO.ERS_USER_ROLES
-                if (user.getUserRoleType().equals("employee")){
-                    request.getRequestDispatcher("Body.html").forward(request, response);
-                }
-                else {
+                //if (user.getUserRoleType().equals("employee")){
+                //    request.getRequestDispatcher("Body.html").forward(request, response);
+                //}
+                //else {
                     //List<Expense> expenses = businessLogic.retrieveExpenses();
                     //session.setAttribute("expenses", expenses);
                     request.getRequestDispatcher("Body.html").forward(request, response);
-                }
+                //}
             }
         }
     }

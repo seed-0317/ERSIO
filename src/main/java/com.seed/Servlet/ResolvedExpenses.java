@@ -27,7 +27,6 @@ public class ResolvedExpenses extends HttpServlet {
         }
         else{
             expenses = businessLogic.retrieveResolvedExpensesByManager(userID);
-            System.out.println(expenses);
         }
 
         session.setAttribute("expenses", expenses);
