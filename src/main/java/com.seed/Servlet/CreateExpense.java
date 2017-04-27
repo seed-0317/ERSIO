@@ -35,6 +35,8 @@ public class CreateExpense extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
         int idAuthor= (int)session.getAttribute("userID");
+        String firstName = (String)session.getAttribute("firstName");
+        String lastName = (String)session.getAttribute("lastName");
 
         double amount=Double.parseDouble(request.getParameter("amountForm"));
         String descriptor=request.getParameter("descriptionForm");
@@ -47,6 +49,8 @@ public class CreateExpense extends HttpServlet {
         newExpense.setDescriptor(descriptor);
         newExpense.setType(type);
         newExpense.setIdAuthor(idAuthor);
+        newExpense.setFirstName(firstName);
+        newExpense.setLastName(lastName);
 
         businessLogic.createExpense(newExpense);
 

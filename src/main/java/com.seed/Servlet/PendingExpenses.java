@@ -25,13 +25,7 @@ public class PendingExpenses extends HttpServlet {
         String userRoleType=(String)session.getAttribute("userRoleType");
         int userID=(int)session.getAttribute("userID");
 
-        List<Expense> expenses;
-        if (userRoleType.equals("employee")){
-            expenses = businessLogic.retrievePendingExpensesByAuthor(userID);
-        }
-        else{
-            expenses = businessLogic.retrievePendingExpensesByManager(userID);
-        }
+        List<Expense> expenses = businessLogic.retrievePendingExpensesByManager(userID);
 
         session.setAttribute("expenses", expenses);
 
@@ -45,27 +39,13 @@ public class PendingExpenses extends HttpServlet {
 
         Map<String, Integer> statusLookup= businessLogic.retrieveExpenseStatus();
 
-        for (String key : statusLookup.keySet()) {
-
-            System.out.println("key: " + key + " value: " + statusLookup.get(key));
-        }
-
-
-
         for (String key : myMap.keySet()) {
-            System.out.println(key);
             int RS_ID = Integer.parseInt(key);
-            System.out.println(RS_ID);
             String status = myMap.get(key)[0];
-            System.out.println(status);
             int RS_STATUS=statusLookup.get(status);
-            System.out.println(RS_STATUS);
 
             businessLogic.resolveReimbursement(RS_ID, RS_STATUS);
         }
-
         request.getRequestDispatcher("ExpenseGrid.html").forward(request, response);
-
-
     }
 }

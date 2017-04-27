@@ -10,13 +10,25 @@ import java.util.*;
 
 public class ExpenseDaoImpl implements ExpenseDao {
 
+    private String expenseQuery(){
+        return "SELECT R_ID, R_AMOUNT, R_DESCRIPTION, R_SUBMITTED, R_RESOLVED, U_ID_AUTHOR, U_ID_RESOLVER, B.RT_TYPE, C.RS_STATUS AS RT_STATUS, D.U_FIRSTNAME, D.U_LASTNAME " +
+                "FROM ERSIO.ERS_REIMBURSEMENTS A " +
+                "JOIN ERSIO.ERS_REIMBURSEMENT_TYPE B " +
+                "ON A.RT_TYPE=B.RT_ID " +
+                "JOIN ERSIO.ERS_REIMBURSEMENT_STATUS C " +
+                "ON A.RT_STATUS=C.RS_ID " +
+                "JOIN ERSIO.ERS_USERS D " +
+                "ON A.U_ID_AUTHOR = D.U_ID";
+    }
+
+
     private String currentDate(){
         SimpleDateFormat sdfDate = new SimpleDateFormat("MM/dd/yyyy");
         return sdfDate.format(new Date());
     }
     private int expenseTypeLookup(String key){
         Map<String,Integer> map = retrieveExpenseTypes();
-        return map.get(key);//unboxing...doesn't require intValue()
+        return map.get(key);
     }
     private int managerLookup(int employeeID){
         try(Connection connection = ConnectionFactory.createConnection();){
@@ -72,8 +84,10 @@ public class ExpenseDaoImpl implements ExpenseDao {
                 int resolver = resultset.getInt("U_ID_RESOLVER");
                 String type = resultset.getString("RT_TYPE");
                 String status = resultset.getString("RT_STATUS");
+                String firstName = resultset.getString("U_FIRSTNAME");
+                String lastName = resultset.getString("U_LASTNAME");
 
-                Expense temp = new Expense(expenseID, amount, descriptor, submitted, resolved, idAuthor, resolver, type, status);
+                Expense temp = new Expense(expenseID, amount, descriptor, submitted, resolved, idAuthor, resolver, type, status, firstName, lastName);
                 list.add(temp);
             }
             return list;
@@ -88,12 +102,7 @@ public class ExpenseDaoImpl implements ExpenseDao {
         try(Connection connection = ConnectionFactory.createConnection();){
 
             PreparedStatement statement = connection.prepareStatement(
-                    "SELECT R_ID, R_AMOUNT, R_DESCRIPTION, R_SUBMITTED, R_RESOLVED, U_ID_AUTHOR, U_ID_RESOLVER, B.RT_TYPE, C.RS_STATUS AS RT_STATUS " +
-                            "FROM ERSIO.ERS_REIMBURSEMENTS A " +
-                            "LEFT JOIN ERSIO.ERS_REIMBURSEMENT_TYPE B " +
-                            "ON A.RT_TYPE=B.RT_ID " +
-                            "LEFT JOIN ERSIO.ERS_REIMBURSEMENT_STATUS C " +
-                            "ON A.RT_STATUS=C.RS_ID");
+                    expenseQuery());
 
             ResultSet resultset = statement.executeQuery();
             return createListFromResultSet(resultset);
@@ -108,13 +117,7 @@ public class ExpenseDaoImpl implements ExpenseDao {
         try(Connection connection = ConnectionFactory.createConnection();){
 
             PreparedStatement statement = connection.prepareStatement(
-                    "SELECT R_ID, R_AMOUNT, R_DESCRIPTION, R_SUBMITTED, R_RESOLVED, U_ID_AUTHOR, U_ID_RESOLVER, B.RT_TYPE, C.RS_STATUS AS RT_STATUS " +
-                            "FROM ERSIO.ERS_REIMBURSEMENTS A " +
-                            "LEFT JOIN ERSIO.ERS_REIMBURSEMENT_TYPE B " +
-                            "ON A.RT_TYPE=B.RT_ID " +
-                            "LEFT JOIN ERSIO.ERS_REIMBURSEMENT_STATUS C " +
-                            "ON A.RT_STATUS=C.RS_ID " +
-                            "WHERE RT_STATUS = 3");
+                    expenseQuery() + " WHERE RT_STATUS = 3");
 
             ResultSet resultset = statement.executeQuery();
             return createListFromResultSet(resultset);
@@ -128,14 +131,7 @@ public class ExpenseDaoImpl implements ExpenseDao {
     public List<Expense> retrieveResolvedExpenses() {
         try(Connection connection = ConnectionFactory.createConnection();){
 
-            PreparedStatement statement = connection.prepareStatement(
-                    "SELECT R_ID, R_AMOUNT, R_DESCRIPTION, R_SUBMITTED, R_RESOLVED, U_ID_AUTHOR, U_ID_RESOLVER, B.RT_TYPE, C.RS_STATUS AS RT_STATUS " +
-                            "FROM ERSIO.ERS_REIMBURSEMENTS A " +
-                            "LEFT JOIN ERSIO.ERS_REIMBURSEMENT_TYPE B " +
-                            "ON A.RT_TYPE=B.RT_ID " +
-                            "LEFT JOIN ERSIO.ERS_REIMBURSEMENT_STATUS C " +
-                            "ON A.RT_STATUS=C.RS_ID " +
-                            "WHERE RT_STATUS <> 3");
+            PreparedStatement statement = connection.prepareStatement(expenseQuery() + " WHERE RT_STATUS <> 3");
 
             ResultSet resultset = statement.executeQuery();
             return createListFromResultSet(resultset);
@@ -150,13 +146,12 @@ public class ExpenseDaoImpl implements ExpenseDao {
         try(Connection connection = ConnectionFactory.createConnection();){
 
             PreparedStatement statement = connection.prepareStatement("update ERSIO.ERS_REIMBURSEMENTS A " +
-                    "SET RT_STATUS=?," +
-                    "R_RESOLVED=?" +
+                    "SET RT_STATUS=?, " +
+                    "R_RESOLVED=? " +
                     "WHERE R_ID=?");
 
 
             statement.setInt(1, RS_STATUS);
-            //statement.setString(2, managerUserName);
             statement.setString(2, currentDate());
             statement.setInt(3, R_ID);
 
